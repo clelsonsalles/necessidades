@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./pdtic/templates/templateIndex.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<ui:define name="conteudo">
+
+
+        <div class="row text-center">
+                <div class="col-lg-12">
+					<div class="col-lg-1" style="padding-top: 35px">
+						<i class="glyphicon glyphicon-refresh" style="font-size:4em;"></i> 
+                    </div>
+	                <div class="col-lg-11 text-left">
+						<h1>Aguarde </h1>
+						<h4 id="idMensagemAcesso">Iniciando o Levantamento das Necessidades de Informação de TIC do CNPq ...</h4>
+                    </div>
+                </div>
+        </div>
+
+
+    <script type="text/javascript">
+	        function pageRedirect() {
+	            window.location.replace("pdtic/001_inicio.xhtml");
+	        }      
+	        setTimeout("pageRedirect()", 1000);
+    </script>
+
+		
+		
+	</ui:define>
+</ui:composition>

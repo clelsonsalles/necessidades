@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<ui:define name="conteudo" >
+	    <script type="text/javascript">
+		        function pageRedirect() {
+		            window.location.replace("./001_inicio.xhtml");
+		        }      
+				if (#{usuarioControle.usuario == null || usuarioControle.usuario.idUsuario == null})
+			        setTimeout("pageRedirect()", 0);
+		        
+		        function pageRedirectInstrucoes() {
+		            window.location.replace("./002_instrucoes.xhtml");
+		        }      
+				if (#{usuarioControle.usuario != null and usuarioControle.usuario.idUsuario != null and !usuarioControle.usuario.leuInstrucoes})
+			        setTimeout("pageRedirectInstrucoes()", 0);
+	    </script>
+
+		<style type="text/css">
+			.btn-xs{
+				padding: 1px;
+			}
+		</style>
+        <div id="page-wrapper" style="padding-top: 0px">
+
+                 <div class="col-lg-12">
+					<div class="col-lg-1" style="padding-top: 25px">
+						<i class="glyphicon glyphicon-cog" style="font-size:4em;"></i> 
+                    </div>
+	                <div class="col-lg-7" >
+		                <div class="col-lg-12">
+							<h1 style="font-size: 1.8em;">Comentários Finais </h1>
+						</div>
+		                <div class="col-lg-12 text-bottom" style="top: 40px;position: absolute;">
+							<h4 style="font-size: 1em; padding: 0px">
+							Espaço livre para críticas, sugestões e considerações para auxiliar o processo de levantamento e seleção de necessidades de TIC do CNPq.
+							</h4> 
+						</div>
+                    </div>
+
+	                <div class="col-lg-4">
+	                    <div class="panel panel-default ">
+	                        <div class="panel-body alert-warning">
+	                            <div class="col-lg-2" style="font-size:3em; padding: 10px 0 0 0">
+	                                <i class="glyphicon glyphicon glyphicon-link" ></i>
+	                            </div>
+								<div class="col-lg-10" style="padding: 0px">
+									<p class="alerts-text">Documentos de Referência</p>
+					                <div class="col-lg-12 " style="padding-left: 0px; ">
+										<a href="http://portal-intranet.cnpq.br/documents/1123862/1124301/Planejamento+Estrat%C3%A9gico+CNPq+2025+-+Plano+Operacional/79206635-6dd6-4226-af54-f8ff834075a2" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Planejamento Estratégico CNPq
+										</a><br />
+										<a href="http://sisp.gov.br/egd/wiki/download/file/EGD" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										EGD
+										</a><br />
+										<a href="http://portal-intranet.cnpq.br/web/ti/documentos-de-referencia" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Outras referências
+										</a>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+                
+
+			<h:form>			
+				<div class="col-lg-12">
+				    <label for="comentario" class="col-lg-2">
+				        Seus comentários:
+				    </label>
+				    <div class="col-lg-10">
+		               <p:inputTextarea class="form-control" maxlength="2000" rows="5"
+		               		value="#{usuarioControle.usuario.comentarios}"
+							placeholder="Espaço livre para críticas, sugestões e considerações para auxiliar o processo de levantamento e seleção de necessidades de TIC ao CNPq."/>
+				    </div>
+				    <div class="col-lg-2 text-right " style='padding-top: 25px'>
+	            	</div>
+				</div>
+					
+		
+			
+				<div class="col-lg-12 text-right " style='padding: 25px 0 '>
+					<div class="col-lg-10 text-right " style='padding: 25px 0 '>
+						<p:commandButton value="Salvar Rascunho" 
+				       	    action="#{usuarioControle.salvarComentarios}" styleClass="btn btn-info" >
+				       	</p:commandButton>
+					</div>
+					<div class="col-lg-2 text-right " style='padding: 25px 0 '>
+						<a href="#" class="btn btn-info " id='idBotaoEnviar' role="button">Finalizar e Enviar</a>
+					</div>
+				</div>
+
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="modalFinalizarSair" role="dialog" >
+    <div class="modal-dialog" >
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Confirmar a Finalização do Levantamento e SAIR</h4>
+        </div>
+        <div class="modal-body">
+
+		<div class="panel-body" >			
+			
+
+              <div class="col-lg-12" >
+                  <div class="panel panel-default ">
+                      <div class="panel-body alert-warning">
+						<div class="col-lg-2">
+						    <i class="glyphicon glyphicon glyphicon-warning-sign" style="font-size:4em;"></i>
+						</div>
+						<div class="col-lg-10">
+							<p class="alerts-text">
+							Deseja realmente finalizar o Levantamento de Necessidades de Informação de TIC?
+							<br/>
+							Uma vez finalizado, não será permitido editar o Levantamento
+							</p>
+						</div>
+                      </div>
+                  </div>
+              </div>
+
+
+			
+
+			
+			
+		</div>	  
+
+        </div>
+        <div class="modal-footer ">
+			<div class="col-lg-12 text-right " >
+				<div class="col-lg-10 text-right " >
+					<p:commandButton value="Finalizar e Enviar" 
+			       	    action="#{usuarioControle.finalizarLevantamento}" styleClass="btn btn-warning" >
+			       	</p:commandButton>
+				</div>
+				<div class="col-lg-2 text-right " >
+			          <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+				</div>
+			</div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+			</h:form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+
+    <!-- /#wrapper -->
+
+
+
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("#idBotaoEnviar").click(function(){
+            $("#modalFinalizarSair").modal(1000);
+             
+        });
+    });		
+    </script>
+		
+	</ui:define>
+</ui:composition>
+

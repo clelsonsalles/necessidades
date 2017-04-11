@@ -1,0 +1,168 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Levantamento das Necessidades de Informação de TIC do CNPq</title>
+
+    <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="./font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/local.css" />
+
+    <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+
+	<h:outputStylesheet name="default.css" library="css" />
+	<h:outputStylesheet name="cssLayout.css" library="css" />
+	<h:outputStylesheet name="estilo.css" library="css" />
+	<h:outputStylesheet name="estiloGoogle.css" library="css" />
+	<h:outputScript name="locale-primefaces.js" library="js" />
+	
+</h:head>
+
+<h:body>
+	<style type="text/css">
+		.ui-growl {
+			top: 120px;
+		}
+		iframe{
+			width: 800px;
+			height: 500px;
+		}
+	</style>
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/necessidades/index.html">Levantamento das Necessidades de Informação de TIC do CNPq</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+            	<h:form>
+                <ul class="nav navbar-nav side-nav">
+                    <li>
+		                <a class="navbar-nav" target="_blank" 
+		                	href="http://sisp.gov.br/guiapdtic/wiki/download/file/Guia_de_PDTIC_do_SISP_v2.0.pdf">
+		                Processo 2.7 do Guia de PDTIC do SISP
+						</a>
+					</li>
+                    <li>
+                    	<a href="001_inicio.xhtml"><i class="glyphicon glyphicon-user"></i> Identificação</a>
+                    </li>
+                    <li class="#{usuarioControle.usuario.idUsuario == null ? 'disabled' : ''}">
+                    	<a href="002_instrucoes.xhtml" class="#{usuarioControle.usuario.idUsuario == null ? 'disabled' : ''}">
+                    		<i class="glyphicon glyphicon-flag"></i> Instruções</a>
+                    </li>
+                    <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
+                    	<h:commandLink action="#{usuarioControle.iniciarProjetosTransversais}" 
+                    		value=" Projetos Transversais"  
+                    		styleClass="glyphicon glyphicon-fullscreen #{usuarioControle.informouLeitura ? 'disabled' : ''}"></h:commandLink>
+                    </li>
+                    <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
+                    	<h:commandLink action="#{usuarioControle.iniciarProjetosEspecificos()}" 
+                    		value=" Projetos Específicos"  
+                    		styleClass="glyphicon glyphicon-transfer #{usuarioControle.informouLeitura ? 'disabled' : ''}"></h:commandLink>
+                    </li>
+                    <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
+                    	<h:commandLink action="#{usuarioControle.iniciarOutrasNecessidades()}" 
+                    		value=" Outras Necessidades" 
+                    		styleClass="glyphicon glyphicon-transfer #{usuarioControle.informouLeitura ? 'disabled' : ''}"></h:commandLink>
+                    </li>
+                    <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
+                    	<a href="006_finalizacao.xhtml"  class="#{usuarioControle.informouLeitura ? 'disabled' : ''}">
+                    		<i class="glyphicon glyphicon-check"></i> Finalização</a>
+                    </li>
+                    <li><a href="glossario.xhtml"><i class="glyphicon glyphicon-list-alt"></i> Glossário</a></li>
+                </ul>
+                </h:form>
+            </div>
+        </nav>
+
+        <div class="row text-center">
+	        <div class="col-lg-12">
+	        	<h:form>
+					<p:growl id="growl" autoUpdate="true" widgetVar="growl" /> 
+					
+					<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();growl.show()" />
+					
+					<p:dialog modal="true" widgetVar="statusDialog" header="Carregando" draggable="false" closable="false">
+						<p:graphicImage value="/img/carregando.gif" />
+					</p:dialog>
+				</h:form>
+			</div>
+		</div>
+	
+
+       <div>
+        <p:outputPanel rendered="#{usuarioControle.usuario == null || usuarioControle.usuario.idUsuario == null || !usuarioControle.usuario.finalizado}">
+			<ui:insert name="conteudo" >
+			</ui:insert>
+		</p:outputPanel>
+		</div>
+        <p:outputPanel rendered="#{usuarioControle.usuario != null and usuarioControle.usuario.idUsuario != null and usuarioControle.usuario.finalizado}">
+			
+                <div class="col-lg-12">
+					<div class="col-lg-1" style="padding-top: 25px">
+						<i class="glyphicon glyphicon-thumbs-up" style="font-size:4em;"></i> 
+                    </div>
+	                <div class="col-lg-7" >
+		                <div class="col-lg-12">
+							<h1 style="font-size: 1.8em;">Parabéns! </h1>
+						</div>
+		                <div class="col-lg-12 text-bottom" style="top: 40px;position: absolute;">
+							<h4 style="font-size: 1em; padding: 0px">
+							Você finalizou este levantamento e encaminhou suas sugestões para a Equipe de Elaboração do PDTIC 2017/2020. 
+							</h4> 
+						</div>
+                    </div>
+
+	                <div class="col-lg-4">
+	                    <div class="panel panel-default ">
+	                        <div class="panel-body alert-warning">
+	                            <div class="col-lg-2" style="font-size:3em; padding: 10px 0 0 0">
+	                                <i class="glyphicon glyphicon glyphicon-link" ></i>
+	                            </div>
+								<div class="col-lg-10" style="padding: 0px">
+									<p class="alerts-text">Documentos de Referência</p>
+					                <div class="col-lg-12 " style="padding-left: 0px; ">
+										<a href="http://portal-intranet.cnpq.br/documents/1123862/1124301/Planejamento+Estrat%C3%A9gico+CNPq+2025+-+Plano+Operacional/79206635-6dd6-4226-af54-f8ff834075a2" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Planejamento Estratégico CNPq
+										</a><br />
+										<a href="http://sisp.gov.br/egd/wiki/download/file/EGD" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										EGD
+										</a><br />
+										<a href="http://portal-intranet.cnpq.br/web/ti/documentos-de-referencia" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Outras referências
+										</a>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>			
+			
+			
+		</p:outputPanel>
+		<ui:insert name="conteudoLivre" >
+		</ui:insert>
+
+	
+	</div>
+	
+</h:body>
+</html>

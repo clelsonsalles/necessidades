@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<ui:define name="conteudo">
+
+		<style type="text/css">
+
+		</style>
+
+        <div id="page-wrapper" style="padding-top: 0px">
+            <div class="row">
+                <div class="col-lg-12">
+					<div class="col-lg-1" style="padding-top: 25px">
+						<i class="glyphicon glyphicon-fullscreen" style="font-size:4em;"></i> 
+                    </div>
+	                <div class="col-lg-7" >
+		                <div class="col-lg-12">
+							<h1 style="font-size: 1.8em;">Projetos Transversais </h1>
+						</div>
+		                <div class="col-lg-12 text-bottom" style="top: 40px;position: absolute;">
+							<h4 style="font-size: 1em; padding: 0px">Projetos Transversais são aqueles que envolvem diferentes áreas da Instituição, na busca de benefícios diretos dos resultados que promovem ao serem executados. </h4> 
+						</div>
+                    </div>
+
+	                <div class="col-lg-4">
+	                    <div class="panel panel-default ">
+	                        <div class="panel-body alert-warning">
+	                            <div class="col-lg-2" style="font-size:3em; padding: 10px 0 0 0">
+	                                <i class="glyphicon glyphicon glyphicon-link" ></i>
+	                            </div>
+								<div class="col-lg-10" style="padding: 0px">
+									<p class="alerts-text">Documentos de Referência</p>
+					                <div class="col-lg-12 " style="padding-left: 0px; ">
+										<a href="http://portal-intranet.cnpq.br/documents/1123862/1124301/Planejamento+Estrat%C3%A9gico+CNPq+2025+-+Plano+Operacional/79206635-6dd6-4226-af54-f8ff834075a2" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Planejamento Estratégico CNPq
+										</a><br />
+										<a href="http://sisp.gov.br/egd/wiki/download/file/EGD" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										EGD
+										</a><br />
+										<a href="http://portal-intranet.cnpq.br/web/ti/documentos-de-referencia" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Outras referências
+										</a>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+                </div>
+<h:form id="formNecessidades"> 
+    <p:accordionPanel value="#{usuarioControle.listaProjetosTransversais()}" var="projetoTransversal" >
+     <p:ajax event="tabChange" listener="#{usuarioControle.tabProjetoTransversalAlterada}" update=":formNecessidades" />
+     <p:ajax event="tabClose" listener="#{usuarioControle.tabProjetoTransversalFechada}" update=":formNecessidades" />
+ 
+        <p:tab title="#{projetoTransversal.nome}" titletip="#{projetoTransversal.id}" >
+	        
+	 			<div class="col-lg-12" style='padding-top: 10px; '>
+				<div class="alert alert-dismissable alert-info">
+					#{projetoTransversal.nome}
+					<p style='padding-left: 30px; font-size: 1.2em'>
+						#{projetoTransversal.descricao}
+					</p>
+					Objetivo/Justificativa:
+					<p style='padding-left: 30px;'>
+						#{projetoTransversal.justificativa}
+					</p>
+				</div>
+			</div>
+            <div class="col-lg-12" style="padding-top: 5px">
+                <div class="panel panel-default ">
+                    <div class="panel-body alert-warning">
+				<div class="col-lg-1">
+				    <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em;"></i>
+				</div>
+				<div class="col-lg-11" style="padding-top: 10px">
+					<p class="alerts-text">
+					Relacione suas necessidades de informação de TIC para este Projeto Transversal
+					</p>
+				</div>
+                    </div>
+                </div>
+            </div>
+            
+            <p:outputPanel rendered="#{usuarioControle.idProjetoTransversalSelecionadoIntger == projetoTransversal.id}">
+					<div class="col-lg-12" style="padding-top: 15px">
+					    <label for="necessidade" class="col-lg-2">
+					        Necessidade:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputText class="form-control" id="necessidade#{projetoTransversal.id}" placeholder="Nome da Necessidade" size="200" maxlength="200" 
+			                	required="true" requiredMessage="Nome da necessidade é obrigatório"  value="#{usuarioControle.necessidade.titulo}"/>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+					    <label for="descricao" class="col-lg-2">
+					        Descrição:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputTextarea styleClass="form-control" id="descricao#{projetoTransversal.id}" maxlength="500" label="Teste de Label"
+			                	placeholder="Qual a necessidade (nível tático/gerencial) que você descreveria para a melhoria das atividades e ações de TIC no CNPq? " 
+			                	required="true" requiredMessage="Descrição da necessidade é obrigatório"  
+			                	value="#{usuarioControle.necessidade.descricao}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+					    <label for="justificativa" class="col-lg-2">
+					        Justificativa:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputTextarea styleClass="form-control" id="justificativa#{projetoTransversal.id}" maxlength="500" 
+			                	placeholder="Finalize com uma breve justificativa que poderemos utilizar para priorizar a necessidade ao desenvolvimento de projetos  de TIC." 
+			                	required="true" requiredMessage="Justificativa da necessidade é obrigatório"  
+			                	value="#{usuarioControle.necessidade.justificativa}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+				    <div class="col-lg-12 text-right " style="padding-top: 10px">
+						<p:commandButton value="Registrar" id="idBotaoRegistrar#{projetoTransversal.id}" 
+	          	    		action="#{usuarioControle.salvarNecessidade}" styleClass="btn btn-info" >
+			        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoTransversalSelecionado}" value="#{projetoTransversal.id}" />
+	          	    	</p:commandButton>						
+						<p:commandButton value="Incluir +" id="idBotaoIncluir#{projetoTransversal.id}" 
+	          	    		action="#{usuarioControle.incluirNovaNecessidade}" styleClass="btn btn-info" >	
+			        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoTransversalSelecionado}" value="#{projetoTransversal.id}" />
+	          	    	</p:commandButton>													
+		           	</div>
+		  </p:outputPanel>
+        
+        </p:tab>
+   	</p:accordionPanel>
+</h:form>
+
+  <div class="panel-group" id="accordion">
+		<ui:repeat value="#{usuarioControle.listaProjetosTransversais()}" var="projetoTransversal">
+		    <div class="panel panel-default">
+		      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+		        <h4 class="panel-title">
+		          <a data-toggle="collapse" data-parent="#accordion" href="#collapse#{projetoTransversal.id}" 
+		          	style="color: white; text-decoration: none; padding-top: 10px">
+					#{projetoTransversal.nome}
+					</a>
+		        </h4>
+		      </div>
+		      <div id="collapse#{projetoTransversal.id}" class="panel-collapse collapse #{projetoTransversal.id == 1 ? 'in' : ''}">
+				<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+					<div class="col-lg-12" style='padding-top: 10px; '>
+						<div class="alert alert-dismissable alert-info">
+							#{projetoTransversal.nome}
+							<p style='padding-left: 30px; font-size: 1.2em'>
+								#{projetoTransversal.descricao}
+							</p>
+							Objetivo/Justificativa:
+							<p style='padding-left: 30px;'>
+								#{projetoTransversal.justificativa}
+							</p>
+						</div>
+					</div>
+					
+		              <div class="col-lg-12" style="padding-top: 5px">
+		                  <div class="panel panel-default ">
+		                      <div class="panel-body alert-warning">
+								<div class="col-lg-1">
+								    <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em;"></i>
+								</div>
+								<div class="col-lg-11" style="padding-top: 10px">
+									<p class="alerts-text">
+									Relacione suas necessidades de informação de TIC para este Projeto Transversal
+									</p>
+								</div>
+		                      </div>
+		                  </div>
+		              </div>
+		
+            <p:outputPanel rendered="#{usuarioControle.idProjetoTransversalSelecionadoIntger == projetoTransversal.id}">
+				<h:form id="#{projetoTransversal.id}formTrans" >
+					
+					<div class="col-lg-12" style="padding-top: 15px">
+					    <label for="necessidade" class="col-lg-2">
+					        Necessidade:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputText class="form-control" id="necessidade#{projetoTransversal.id}" placeholder="Nome da Necessidade" size="200" maxlength="200" 
+			                	required="true" requiredMessage="Nome da necessidade é obrigatório"  value="#{usuarioControle.necessidade.titulo}"/>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+					    <label for="descricao" class="col-lg-2">
+					        Descrição:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputTextarea styleClass="form-control" id="descricao#{projetoTransversal.id}" maxlength="500" label="Teste de Label"
+			                	placeholder="Qual a necessidade (nível tático/gerencial) que você descreveria para a melhoria das atividades e ações de TIC no CNPq? " 
+			                	required="true" requiredMessage="Descrição da necessidade é obrigatório"  
+			                	value="#{usuarioControle.necessidade.descricao}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+					    <label for="justificativa" class="col-lg-2">
+					        Justificativa:
+					    </label>
+					    <div class="col-lg-10">
+			                <p:inputTextarea styleClass="form-control" id="justificativa#{projetoTransversal.id}" maxlength="500" 
+			                	placeholder="Finalize com uma breve justificativa que poderemos utilizar para priorizar a necessidade ao desenvolvimento de projetos  de TIC." 
+			                	required="true" requiredMessage="Justificativa da necessidade é obrigatório"  
+			                	value="#{usuarioControle.necessidade.justificativa}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+				    <div class="col-lg-12 text-right " style="padding-top: 10px">
+						<p:commandButton value="Registrar" id="idBotaoRegistrar#{projetoTransversal.id}" 
+	          	    		action="#{usuarioControle.salvarNecessidade}" styleClass="btn btn-info" />							
+						<p:commandButton value="Incluir +" id="idBotaoIncluir#{projetoTransversal.id}" 
+	          	    		action="#{usuarioControle.incluirNovaNecessidade}" styleClass="btn btn-info" />							
+		           	</div>
+				</h:form>
+			</p:outputPanel>		
+					
+				</div>
+			</div>
+			</div>    
+	    </ui:repeat>
+	
+	
+		  
+		
+	</div>
+
+
+	<div class="col-lg-12 text-right " style='padding: 25px 0 '>
+		<a href="004_projetosEspecificos.html" class="btn btn-info " id='idIncluirMaisPt01' role="button">Próximos passos</a>
+	</div>
+
+
+
+		
+
+		
+		
+
+
+    </div>
+    <!-- /#wrapper -->
+
+
+
+
+    <script type="text/javascript">
+	    $(document).ready(function(){
+			$( '#idCheckCiencia' ).click(function() {
+			  $( '.idBotaoIniciar' ).toggleClass( "disabled" );
+			});
+		});
+    </script>
+		
+		
+	</ui:define>
+</ui:composition>
+

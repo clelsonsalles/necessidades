@@ -1,0 +1,312 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="./templates/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	
+	<ui:define name="conteudo" >
+	    <script type="text/javascript">
+		        function pageRedirect() {
+		            window.location.replace("./001_inicio.xhtml");
+		        }      
+				if (#{usuarioControle.usuario == null || usuarioControle.usuario.idUsuario == null})
+			        setTimeout("pageRedirect()", 0);
+		        
+		        function pageRedirectInstrucoes() {
+		            window.location.replace("./002_instrucoes.xhtml");
+		        }      
+				if (#{usuarioControle.usuario != null and usuarioControle.usuario.idUsuario != null and !usuarioControle.usuario.leuInstrucoes})
+			        setTimeout("pageRedirectInstrucoes()", 0);
+	    </script>
+
+		<style type="text/css">
+			.btn-xs{
+				padding: 1px;
+			}
+			.ui-selectmanycheckbox label{
+				padding-left: 8px;
+				font-weight: unset;
+				font-size: 0.8em;
+			}
+		</style>
+        <div id="page-wrapper" style="padding-top: 0px">
+            <div class="row">
+                <div class="col-lg-12">
+					<div class="col-lg-1" style="padding-top: 25px">
+						<i class="glyphicon glyphicon-cog" style="font-size:4em;"></i> 
+                    </div>
+	                <div class="col-lg-7" >
+		                <div class="col-lg-12">
+							<h1 style="font-size: 1.8em;">Outras Necessidades da Informação de TIC </h1>
+						</div>
+		                <div class="col-lg-12 text-bottom" style="top: 40px;position: absolute;">
+							<h4 style="font-size: 1em; padding: 0px">
+							Outras necessidades não correlatas a Projetos Transversais ou Específicos, mas que são inovadoras ou correlacionadas aos sistemas e serviços já ofertados pelo CNPq. 
+							</h4> 
+						</div>
+                    </div>
+
+	                <div class="col-lg-4">
+	                    <div class="panel panel-default ">
+	                        <div class="panel-body alert-warning">
+	                            <div class="col-lg-2" style="font-size:3em; padding: 10px 0 0 0">
+	                                <i class="glyphicon glyphicon glyphicon-link" ></i>
+	                            </div>
+								<div class="col-lg-10" style="padding: 0px">
+									<p class="alerts-text">Documentos de Referência</p>
+					                <div class="col-lg-12 " style="padding-left: 0px; ">
+										<a href="http://portal-intranet.cnpq.br/documents/1123862/1124301/Planejamento+Estrat%C3%A9gico+CNPq+2025+-+Plano+Operacional/79206635-6dd6-4226-af54-f8ff834075a2" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Planejamento Estratégico CNPq
+										</a><br />
+										<a href="http://sisp.gov.br/egd/wiki/download/file/EGD" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										EGD
+										</a><br />
+										<a href="http://portal-intranet.cnpq.br/web/ti/documentos-de-referencia" 
+											target="_blank" style="text-decoration: none">
+										<i class="glyphicon glyphicon-file" style="font-size:1em;"></i> 
+										Outras referências
+										</a>
+									</div>
+								</div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+
+
+               <div class="col-lg-12" style="padding-top: 5px">
+                  <div class="panel panel-default ">
+                      <div class="panel-body alert-warning">
+						<div class="col-lg-1">
+						    <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em;"></i>
+						</div>
+						<div class="col-lg-11" style="padding-top: 0px">
+							<p class="alerts-text">
+							Relacione outras necessidades de informação de TIC. Poderão ser incluídas necessidades relativas a aprimoramento, integração ou manutenção de sistemas, técnicas e recursos atuais.
+							</p>
+						</div>
+                      </div>
+                  </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+		<h:form>
+
+		              
+			<div class="col-lg-12">
+	            <ui:repeat var="necessidade" value="#{usuarioControle.listaOutrasNecessidades}" >
+					<div class="col-lg-6" style="padding-top: 5px">
+		            	<div class="panel panel-default #{usuarioControle.necessidade.id == necessidade.id ? 'panel-warning' : ''}">
+                                <div class="panel-heading">#{necessidade.titulo}</div>
+                                <div class="panel-body #{usuarioControle.necessidade.id == necessidade.id ? 'alert-warning' : ''}">
+									#{necessidade.descricao}
+                                </div>
+                                <div class="text-center #{usuarioControle.necessidade.id == necessidade.id ? 'alert-warning' : ''}" style="padding: 5px 0" >
+									<p:commandButton value="Selecionar para Editar"  
+				          	    		action="#{usuarioControle.iniciaEditarOutraNecessidade}" styleClass="btn btn-info btn-xs" >	
+						        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+				          	    	</p:commandButton>													
+								 
+									<p:commandButton value="Selecionar para Excluir"  
+				          	    		action="#{usuarioControle.iniciaExcluirOutraNecessidade}" styleClass="btn btn-warning btn-xs" >	
+						        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+				          	    	</p:commandButton>													
+                                </div>
+                        </div>
+                       </div>
+	            </ui:repeat>
+            </div>
+					  
+
+
+
+
+
+
+			<div class="col-lg-12" >
+				<div class="col-lg-06" >
+					<div class="col-lg-12" style="padding-top: 15px">
+						<p:outputLabel for="necessidade" styleClass="col-lg-2" value="Necessidade:"></p:outputLabel>
+					    <div class="col-lg-10">
+				               <p:inputText class="form-control" placeholder="Nome da Necessidade" 
+				               		id="necessidade" value="#{usuarioControle.necessidade.titulo}"/>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+						<p:outputLabel for="descricao" styleClass="col-lg-2" value="Descrição:"></p:outputLabel>
+					    <div class="col-lg-10">
+				               <p:inputTextarea styleClass="form-control" id="descricao"
+				               		placeholder="Qual a necessidade (nível tático/gerencial) que você descreveria para a melhoria das atividades e ações de TIC no CNPq? " 
+				               		value="#{usuarioControle.necessidade.descricao}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+					<div class="col-lg-12">
+						<p:outputLabel for="justificativa" styleClass="col-lg-2" value="Justificativa:"></p:outputLabel>
+					    <div class="col-lg-10">
+				               <p:inputTextarea styleClass="form-control" id="justificativa"
+				               		placeholder="Finalize com uma breve justificativa que poderemos utilizar para priorizar a necessidade ao desenvolvimento de projetos  de TIC." 
+				               		value="#{usuarioControle.necessidade.justificativa}" rows="3" cols="30" ></p:inputTextarea>
+					    </div>
+					</div>
+				</div>
+				<div class="col-lg-06" >
+					
+					<div class="col-lg-12"  style="padding-top: 20px">
+						<div class="col-lg-12" style="padding-top: 25px">
+							<h4 class="list-group-item-heading">Associe esta necessidade aos Objetivos Estratégicos do CNPq e/ou da EGD.</h4>
+						</div>		
+						<div class="col-lg-6">
+			
+				  			  <div class="col-lg-12">
+							  <div class="panel-group" id="accordion2">
+								<div class="panel panel-default">
+								  <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion2" href="#estratCNPq1" style="color: white; text-decoration: none">
+											   Objetivos Estratégicos do CNPq
+									  </a>
+									</h4>
+								  </div>
+								  <div id="estratCNPq1" class="panel-collapse collapse in">
+									<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">	
+										<p:selectManyCheckbox id="idObjetivosCNPq" value="#{usuarioControle.idsObjetivosCNPq}" layout="grid" columns="1" >
+									        <f:selectItems value="#{usuarioControle.objetivosCNPq}" var="objCNPq" 
+									        	itemLabel="#{objCNPq.titulo} - #{objCNPq.nome}" itemValue="#{objCNPq.id}" />
+									    </p:selectManyCheckbox>
+									</div>
+								</div>
+								</div>
+							</div>
+							</div>
+						</div>
+			
+			
+						<div class="col-lg-6" style="padding-left: 40px">
+						  <div class="col-lg-12" >
+						  <div class="panel-group" id="accordion3">
+							<div class="panel panel-default">
+							  <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+								<h4 class="panel-title">
+								  <a data-toggle="collapse" data-parent="#accordion3" href="#estratEGD1" style="color: white; text-decoration: none">
+										   Objetivos Estratégicos da EGD
+								  </a>
+								</h4>
+							  </div>
+							  <div id="estratEGD1" class="panel-collapse collapse in">
+								<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+										<p:selectManyCheckbox id="idObjetivosEGD" value="#{usuarioControle.idsObjetivosEGD}"  layout="grid" columns="1"  >
+									        <f:selectItems value="#{usuarioControle.objetivosEGD}" var="objEGD" 
+									        	itemLabel="#{objEGD.titulo} - #{objEGD.nome}" itemValue="#{objEGD.id}" />
+									    </p:selectManyCheckbox>
+								</div>
+								
+								</div>
+							</div>
+							</div>
+							</div>
+							
+					    <div class="col-lg-12">
+						  <div class="panel-group" id="accordion4">
+							<div class="panel panel-default">
+							  <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+								<h4 class="panel-title">
+								  <a data-toggle="collapse" data-parent="#accordion4" href="outro1" style="color: white; text-decoration: none">
+										   Outros
+								  </a>
+								</h4>
+							  </div>
+							  <div id="outro1" class="panel-collapse collapse in">
+								<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+									<div class="col-lg-12" >
+										<p:outputLabel for="necessidadeSistema"  style="padding-left: 2px; font-size: 0.9em"
+											styleClass="col-lg-3" value="Sistema:"></p:outputLabel>
+									    <div class="col-lg-9">
+								               <p:inputText class="form-control" placeholder="Informe o Sistema" maxlength="144" 
+								               		id="necessidadeSistema" value="#{usuarioControle.necessidade.sistema}"/>
+									    </div>
+									</div>
+									<div class="col-lg-12" >
+										<p:outputLabel for="necessidadePlataforma" style="padding-left: 2px; font-size: 0.9em" 
+											styleClass="col-lg-3" value="Plataforma:"></p:outputLabel>
+									    <div class="col-lg-9">
+								               <p:inputText class="form-control" placeholder="Informe a Plataforma" maxlength="144" 
+								               		id="necessidadePlataforma" value="#{usuarioControle.necessidade.plataforma}"/>
+									    </div>
+									</div>
+									<div class="col-lg-12" >
+										<p:outputLabel for="necessidadeAssunto"  style="padding-left: 2px; font-size: 0.9em"
+											styleClass="col-lg-3" value="Assunto:"></p:outputLabel>
+									    <div class="col-lg-9">
+								               <p:inputText class="form-control" placeholder="Informe o Assunto" maxlength="144" 
+								               		id="necessidadeAssunto" value="#{usuarioControle.necessidade.assunto}"/>
+									    </div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+
+		    <div class="col-lg-12 text-right " style="padding-top: 10px">
+				<p:commandButton value="Salvar"  rendered="#{usuarioControle.cenario.edicao}"
+         	    		action="#{usuarioControle.editarOutraNecessidade}" styleClass="btn btn-info btn-xs" >	
+       	    	</p:commandButton>													
+								 
+				<p:commandButton value="Excluir"  rendered="#{usuarioControle.cenario.exclusao}"
+         	    		action="#{usuarioControle.excluirOutraNecessidade}" styleClass="btn btn-warning btn-xs" >	
+       	    	</p:commandButton>													
+
+				<p:commandButton value="Incluir +"  rendered="#{usuarioControle.cenario.inclusao}"
+         	    		action="#{usuarioControle.incluirOutraNecessidade}" styleClass="btn btn-info btn-xs" >	
+       	    	</p:commandButton>													
+
+				<p:commandButton value="Cancelar"
+         	    		action="#{usuarioControle.iniciarOutrasNecessidades()}" styleClass="btn btn-default btn-xs" >	
+       	    	</p:commandButton>													
+
+           	</div>
+
+		</div>
+	</h:form>
+		
+	<div class="col-lg-12 text-right " style='padding: 25px'>
+		<a href="006_finalizacao.xhtml" class="btn btn-info " id='idIncluirMaisPt01' role="button">Próximos passos</a>
+	</div>
+
+
+		</div>
+		</div>
+
+    <!-- /#wrapper -->
+
+
+
+
+    <script type="text/javascript">
+    </script>
+		
+		
+	</ui:define>
+</ui:composition>
+

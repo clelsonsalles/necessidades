@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+     
+    <h:head>
+        <title>#{usuarioControle.cenario.inclusao ? 'Incluir  Necessidade' : usuarioControle.cenario.edicao ? 'Editar  Necessidade' : usuarioControle.cenario.exclusao ? 'Excluir  Necessidade' : 'Necessidade'}</title>
+
+	    <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css" />
+	    <link rel="stylesheet" type="text/css" href="./font-awesome/css/font-awesome.min.css" />
+	    <link rel="stylesheet" type="text/css" href="./css/local.css" />
+	
+	    <script type="text/javascript" src="./bootstrap/js/bootstrap.min.js"></script>
+
+        <style type="text/css">
+            .ui-widget {
+                font-size: 1em;
+            }
+            body{
+            	margin-top: 5px;
+                font-size: 1em;
+            }
+            .btn{
+            	padding: 15px;
+            }
+        </style>
+    </h:head>
+     
+    <h:body>
+		<div class="col-lg-12" >
+			<div class="alert alert-dismissable alert-info">
+				#{usuarioControle.projetoTransversalSelecionado.nome}
+				<p style='padding-left: 30px; font-size: 1.2em'>
+					#{projetoTransversal.descricao}
+				</p>
+				Objetivo/Justificativa:
+				<p style='padding-left: 30px;'>
+					#{usuarioControle.projetoTransversalSelecionado.justificativa}
+				</p>
+			</div>
+		</div>
+		
+		<div class="col-lg-12" >
+			<p class="alerts-text">
+			Relacione suas necessidades de informação de TIC para este Projeto Transversal
+			</p>
+		</div>
+
+	<h:form id="formDialogNecessidade">		
+		<div class="col-lg-12" style="padding-top: 15px">
+			<p:outputLabel for="necessidade" styleClass="col-lg-2" value="Necessidade:"></p:outputLabel>
+		    <div class="col-lg-10">
+	               <p:inputText class="form-control" placeholder="Nome da Necessidade" 
+	               		id="necessidade" value="#{usuarioControle.necessidade.titulo}"/>
+		    </div>
+		</div>
+		<div class="col-lg-12">
+			<p:outputLabel for="descricao" styleClass="col-lg-2" value="Descrição:"></p:outputLabel>
+		    <div class="col-lg-10">
+	               <p:inputTextarea styleClass="form-control" id="descricao"
+	               		placeholder="Qual a necessidade (nível tático/gerencial) que você descreveria para a melhoria das atividades e ações de TIC no CNPq? " 
+	               		value="#{usuarioControle.necessidade.descricao}" rows="3" cols="30" ></p:inputTextarea>
+		    </div>
+		</div>
+		<div class="col-lg-12">
+			<p:outputLabel for="justificativa" styleClass="col-lg-2" value="Justificativa:"></p:outputLabel>
+		    <div class="col-lg-10">
+	               <p:inputTextarea styleClass="form-control" id="justificativa"
+	               		placeholder="Finalize com uma breve justificativa que poderemos utilizar para priorizar a necessidade ao desenvolvimento de projetos  de TIC." 
+	               		value="#{usuarioControle.necessidade.justificativa}" rows="3" cols="30" ></p:inputTextarea>
+		    </div>
+		</div>
+	    <div class="col-lg-12 text-right " style="padding-top: 10px; font-size: 1.2em">
+			<p:commandButton value="Incluir" oncomplete="acionarBotaoFechar()"
+	       	    rendered="#{usuarioControle.cenario.inclusao}"	action="#{usuarioControle.salvarNecessidade}" styleClass="btn btn-info" >
+	       	</p:commandButton>						
+			<p:commandButton value="Alterar" 
+	       	    rendered="#{usuarioControle.cenario.edicao}"	action="#{usuarioControle.editarNecessidade()}" styleClass="btn btn-info" >
+	       	</p:commandButton>						
+			<p:commandButton value="Excluir" 
+	       	    rendered="#{usuarioControle.cenario.exclusao}"	action="#{usuarioControle.excluirNecessidade()}" styleClass="btn btn-warning" >
+	       	</p:commandButton>				
+			<p:commandButton value="Cancelar" id='idBotaoCancelar'
+	       	    action="#{usuarioControle.sairViewNecessidade()}" styleClass="btn btn-default" >
+	       	</p:commandButton>				
+	       			
+	   	</div>
+	</h:form>	
+	
+
+    <script type="text/javascript">
+	    $(document).ready(function(){
+			$( '#idCancelar' ).click(function() {
+				$(".ui-dialog-content").hide();
+			});
+		});
+		function acionarBotaoFechar(){
+			$( '#formDialogNecessidade:idBotaoCancelar' ).click();
+		}
+    </script>
+
+
+    </h:body>
+     
+</html>
