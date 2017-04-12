@@ -80,112 +80,53 @@
 
 
                 <div class="col-lg-12">
-                <div class="col-lg-12" style="padding-top: 10px">
-                    <div class="panel panel-default " >
-                        <div class="panel-body alert-warning">
-                            <div class="col-lg-1"  style="padding-top: 5px">
-                                <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em; padding-top: 5px"></i>
-                            </div>
-							<div class="col-lg-11">
-								<p>Recomenda-se, pelo menos, que você preencha as necessidades relacionadas à sua Área.
-								<br />Entretanto, você pode contribuir com o levantamento de necessidades para outras áreas, se julgar necessário
-								<br />Selecione a área para a qual deseja informar necessidades de informação de TIC </p>
-							</div>
-                        </div>
-                    </div>
-                </div>
-				<div class="col-lg-12">
-				<div class="col-lg-7">
-					<div class="col-lg-3">
-						<div id="panelDGTI" class="panel panel-default text-center">
-							<div class="panel-body alert-warning">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-question-sign" style="font-size:2em;"></i>
+	                <div class="col-lg-12" style="padding-top: 10px">
+	                    <div class="panel panel-default " >
+	                        <div class="panel-body alert-warning">
+	                            <div class="col-lg-1"  style="padding-top: 5px">
+	                                <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em; padding-top: 5px"></i>
+	                            </div>
+								<div class="col-lg-11">
+									<p>Recomenda-se, pelo menos, que você preencha as necessidades relacionadas à sua Área.
+									<br />Entretanto, você pode contribuir com o levantamento de necessidades para outras áreas, se julgar necessário
+									<br />Selecione a área para a qual deseja informar necessidades de informação de TIC </p>
 								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">DGTI</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div  id="panelDCOI" class="col-lg-3">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-success">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-ok-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">DCOI</p>
+	                        </div>
+	                    </div>
+	                </div>
+					<div class="col-lg-12">
+						<div class="col-lg-7">
+							<div class="col-lg-3">
+								<div id="panelDGTI" class="panel panel-default text-center">
+									<div class="panel-body alert-warning">
+										<div class="col-lg-12">
+											<i class="glyphicon glyphicon-question-sign" style="font-size:1em;"></i>
+										</div>
+										<div class="col-lg-12">
+											<p class="alerts-text">DGTI</p>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div  id="panelAPA" class="col-lg-3">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-success">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-ok-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">APA</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div  id="panelAPL" class="col-lg-3">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-warning">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-question-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">APL</p>
+							<ui:repeat var="grupoSemDGTI" value="#{usuarioControle.listaGruposProjetosEspecificos_semDGTI}">
+							<div class="col-lg-3">
+								<div  id="panel#{grupoSemDGTI.id}" class="col-lg-3">
+									<div class="panel panel-default text-center">
+										<div class="panel-body alert-success">
+											<div class="col-lg-12">
+												<i class="glyphicon glyphicon-ok-sign" style="font-size:1em;"></i>
+											</div>
+											<div class="col-lg-12">
+												<p class="alerts-text">#{grupoSemDGTI.titulo}</p>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+							</ui:repeat>
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-5">
-					<div class="col-lg-4">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-warning">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-question-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">COEST</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div  id="panelCOCOM" class="col-lg-4">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-warning">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-question-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">COCOM</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div  id="panelOUVIDORIA" class="col-lg-4">
-						<div class="panel panel-default text-center">
-							<div class="panel-body alert-warning">
-								<div class="col-lg-12">
-									<i class="glyphicon glyphicon-question-sign" style="font-size:2em;"></i>
-								</div>
-								<div class="col-lg-12">
-									<p class="alerts-text">Ouvidoria</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-				</div>
-				</div>
 
 
 
@@ -196,39 +137,209 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div class="col-lg-12" style="padding-top: 10px">
 
 <h:form id="idFormNecessidades" rendered="#{usuarioControle.usuario != null and usuarioControle.usuario.idUsuario != null}">
+
+		<div class="col-lg-12" style="padding-top: 10px">
+
+		  <div class="panel-group" id="accordionDGTI" style='display: none'>
+		    <div class="panel panel-default">
+		      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+		        <h4 class="panel-title">
+		          <a data-toggle="collapse" data-parent="accordionDGTI" href="#collapse1" style="color: white; text-decoration: none">
+		          	DGTI
+				  </a>
+		        </h4>
+		      </div>
+			    <div id="collapse1" class="panel-collapse collapse in">
+					<div class="panel-body" style="padding-top: 10px; ">			
+
+						  <div class="panel-group" id="accordionDGTI_E1">
+						    <div class="panel panel-default">
+						      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+						        <h4 class="panel-title">
+						          <a data-toggle="collapse" data-parent="#accordionDGTI_E1" href="#collapseE1" style="color: white; text-decoration: none">
+						          	Projeto DGTI/CGRH E1
+								  </a>
+						        </h4>
+						      </div>
+							    <div id="collapseE1" class="panel-collapse collapse in">
+									<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+										<div class="col-lg-12" style='padding-top: 10px; '>
+											<div class="alert alert-dismissable alert-info">
+												Projeto DGTI/CGRH E1
+												<p style='padding-left: 30px; font-size: 1.2em'>
+												Definir e implementar modelo de Gestão de Desempenho e Bem-Estar por Competências.
+												</p>
+												Observação: 
+												<p style='padding-left: 30px;'>
+												Projeto guarda-chuva, uma espécie de programa que reúne os Projetos Específicos identificados por E1.1 a E1.7, a seguir:
+												</p>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="panel-group" id="accordionDGTI_E1_filhos">
+											    <div class="panel panel-default">
+												<ui:repeat value="#{usuarioControle.listaProjEspE1DGTI()}" var="projetoEspecificoE1DGTI">
+												      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+												        <h4 class="panel-title">
+												          <a data-toggle="collapse" data-parent="#accordionDGTI_E1_filhos" 
+												          	href="#collapseE1_#{projetoEspecificoE1DGTI.id}" style="color: white; text-decoration: none">
+												          		#{projetoEspecificoE1DGTI.nome}
+														  </a>
+												        </h4>
+												      </div>
+												      <div id="collapseE1_#{projetoEspecificoE1DGTI.id}" class="panel-collapse collapse in">
+
+															<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+																<div class="col-lg-12" style='padding-top: 10px; '>
+																	<div class="alert alert-dismissable alert-info">
+																		#{projetoEspecificoE1DGTI.nome}
+																		<p style='padding-left: 30px; font-size: 1.2em'>
+																			#{projetoEspecificoE1DGTI.descricao}
+																		</p>
+																		Objetivo/Justificativa:
+																		<p style='padding-left: 30px;'>
+																			#{projetoEspecificoE1DGTI.justificativa}
+																		</p>
+																	</div>
+																</div>
+																<div class="col-lg-12" style="padding-top: 5px">
+																	<div class="panel panel-default ">
+																	    <div class="panel-body alert-warning">
+																			<div class="col-lg-1">
+																			    <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em;"></i>
+																			</div>
+																			<div class="col-lg-11" style="padding-top: 10px">
+																				<p class="alerts-text">
+																				Relacione suas necessidades de informação de TIC para este Projeto Específico
+																				</p>
+																			</div>
+																        </div>
+																    </div>
+																</div>
+																<div class="col-lg-12">
+														            <ui:repeat var="necessidade" value="#{projetoEspecificoE1DGTI.necessidades}" >
+																		<div class="col-lg-6" style="padding-top: 5px">
+															            	<div class="panel panel-default">
+													                                <div class="panel-heading">#{necessidade.titulo}</div>
+													                                <div class="panel-body">
+																						#{necessidade.descricao}
+													                                </div>
+													                                <div class="text-center" style="padding: 5px 0" >
+																						<p:commandButton value="Editar"  
+																	          	    		action="#{usuarioControle.iniciaEditarNecessidade}" styleClass="btn btn-info btn-xs" >	
+																			        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+																	          	    	</p:commandButton>													
+																					 
+																						<p:commandButton value="Excluir"  
+																	          	    		action="#{usuarioControle.iniciaExcluirNecessidade}" styleClass="btn btn-warning btn-xs" >	
+																			        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+																	          	    	</p:commandButton>													
+													                                </div>
+													                        </div>
+												                        </div>
+														            </ui:repeat>
+													            </div>
+																<div class="col-lg-12 text-right " style='padding: 25px 0 '>
+																	<p:commandButton value="Incluir +"  
+												          	    		action="#{usuarioControle.iniciarIncluirNecessidade}" styleClass="btn btn-info" >	
+														        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoSelecionado}" value="#{projetoEspecificoE1DGTI.id}" />
+												          	    	</p:commandButton>													
+																</div>
+														</div>
+												      </div>
+												</ui:repeat><!-- repeat var #projetoEspecificoE1DGTI -->
+											    </div>
+										    </div><!-- DIV #accordionDGTI_E1_filhos  -->
+										</div>
+									</div>
+								</div><!-- DIV #collapseE1  -->
+							</div>
+						</div><!-- DIV #accordionDGTI_E1  -->
+						
+					<ui:repeat value="#{usuarioControle.listaProjEspDGTIOutros()}" var="projetoEspecificoDGTI">
+					      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" data-parent="#accordionDGTI_E1_filhos" 
+					          	href="#collapseE1_#{projetoEspecificoE1DGTI.id}" style="color: white; text-decoration: none">
+					          		#{projetoEspecificoDGTI.nome}
+							  </a>
+					        </h4>
+					      </div>
+					      <div id="collapseE1_#{projetoEspecificoDGTI.id}" class="panel-collapse collapse in">
+	
+								<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+									<div class="col-lg-12" style='padding-top: 10px; '>
+										<div class="alert alert-dismissable alert-info">
+											#{projetoEspecificoDGTI.nome}
+											<p style='padding-left: 30px; font-size: 1.2em'>
+												#{projetoEspecificoDGTI.descricao}
+											</p>
+											Objetivo/Justificativa:
+											<p style='padding-left: 30px;'>
+												#{projetoEspecificoDGTI.justificativa}
+											</p>
+										</div>
+									</div>
+									<div class="col-lg-12" style="padding-top: 5px">
+										<div class="panel panel-default ">
+										    <div class="panel-body alert-warning">
+												<div class="col-lg-1">
+												    <i class="glyphicon glyphicon glyphicon-edit" style="font-size:3em;"></i>
+												</div>
+												<div class="col-lg-11" style="padding-top: 10px">
+													<p class="alerts-text">
+													Relacione suas necessidades de informação de TIC para este Projeto Específico
+													</p>
+												</div>
+									        </div>
+									    </div>
+									</div>
+									<div class="col-lg-12">
+							            <ui:repeat var="necessidade" value="#{projetoEspecificoDGTI.necessidades}" >
+											<div class="col-lg-6" style="padding-top: 5px">
+								            	<div class="panel panel-default">
+						                                <div class="panel-heading">#{necessidade.titulo}</div>
+						                                <div class="panel-body">
+															#{necessidade.descricao}
+						                                </div>
+						                                <div class="text-center" style="padding: 5px 0" >
+															<p:commandButton value="Editar"  
+										          	    		action="#{usuarioControle.iniciaEditarNecessidade}" styleClass="btn btn-info btn-xs" >	
+												        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+										          	    	</p:commandButton>													
+														 
+															<p:commandButton value="Excluir"  
+										          	    		action="#{usuarioControle.iniciaExcluirNecessidade}" styleClass="btn btn-warning btn-xs" >	
+												        	  <f:setPropertyActionListener target="#{usuarioControle.necessidade}" value="#{necessidade}" />
+										          	    	</p:commandButton>													
+						                                </div>
+						                        </div>
+					                        </div>
+							            </ui:repeat>
+						            </div>
+									<div class="col-lg-12 text-right " style='padding: 25px 0 '>
+										<p:commandButton value="Incluir +"  
+					          	    		action="#{usuarioControle.iniciarIncluirNecessidade}" styleClass="btn btn-info" >	
+							        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoSelecionado}" value="#{projetoEspecificoDGTI.id}" />
+					          	    	</p:commandButton>													
+									</div>
+							</div>
+					      </div>
+					</ui:repeat><!-- repeat var #projetoEspecificoDGTI os outros projetos-->
+					</div>
+				</div><!-- DIV #collapse1  -->
+			</div>
+		</div><!-- DIV #accordionDGTI  -->
+		</div>
+
+
+
+
 		<ui:repeat value="#{usuarioControle.listaProjetosEspecificos()}" var="projetoEspecifico">
+		<div class="col-lg-12" style="padding-top: 10px">
 		  <div class="panel-group" id="accordion#{projetoEspecifico.id}" style='display: none'>
 		    <div class="panel panel-default">
 		      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
@@ -299,13 +410,14 @@
 					<div class="col-lg-12 text-right " style='padding: 25px 0 '>
 						<p:commandButton value="Incluir +"  
 	          	    		action="#{usuarioControle.iniciarIncluirNecessidade}" styleClass="btn btn-info" >	
-			        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoEspecificoSelecionado}" value="#{projetoEspecifico.id}" />
+			        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoSelecionado}" value="#{projetoEspecifico.id}" />
 	          	    	</p:commandButton>													
 					</div>
 			</div>
 			</div>    
 			</div>    
 			</div>
+		</div>
 	    </ui:repeat>
 
 	<div class="col-lg-12 text-right " style='padding: 25px 0 '>
@@ -316,6 +428,7 @@
 
 
 </h:form>
+</div>
 		  
 		
 
@@ -342,10 +455,7 @@
         	$("#accordionOUVIDORIA, #accordionCOCOM, #accordionCOEST, #accordionAPL, #accordionAPA, #accordionDCOI, #accordionDGTI").hide(1000);
             $("#accordionDCOI").show(1000);
         });
-        //panelOUVIDORIA, panelCOCOM, panelCOEST, panelAPL, panelAPA, panelDCOI, panelDGTI
-        
-        //#accordionOUVIDORIA, #accordionCOCOM, #accordionCOEST, #accordionAPL, #accordionAPA, #accordionDCOI, #accordionDGTI
-        
+
     });
     </script>
 		

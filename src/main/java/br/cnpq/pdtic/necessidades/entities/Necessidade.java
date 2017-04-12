@@ -20,6 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -36,7 +37,9 @@ public class Necessidade implements Serializable{
     private static final long serialVersionUID = 1L;
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Necessidade")
+	@SequenceGenerator(name = "id_Necessidade", sequenceName = "ID_NECESSIDADE")
+*/	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;

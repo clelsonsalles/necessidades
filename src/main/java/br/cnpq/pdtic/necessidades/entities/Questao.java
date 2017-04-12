@@ -20,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -36,7 +37,9 @@ public class Questao implements Serializable{
     private static final long serialVersionUID = 1L;
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Questao")
+	@SequenceGenerator(name = "id_Questao", sequenceName = "ID_QUESTAO")
+*/	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;

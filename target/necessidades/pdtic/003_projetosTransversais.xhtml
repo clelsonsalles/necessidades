@@ -149,8 +149,8 @@
 					<div class="col-lg-12 text-right " style='padding: 25px 0 '>
 						<p:commandButton value="Incluir +"  
 	          	    		action="#{usuarioControle.iniciarIncluirNecessidade}" styleClass="btn btn-info" >	
-			        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoTransversalSelecionado}" value="#{projetoTransversal.id}" />
-	          	    	</p:commandButton>													
+				        	  <f:setPropertyActionListener target="#{usuarioControle.idProjetoSelecionado}" value="#{projetoTransversal.id}" />
+	        	    	</p:commandButton>													
 					</div>
 			</div>
 			</div>    
@@ -168,7 +168,10 @@
 
 
 	<div class="col-lg-12 text-right " style='padding: 25px 0 '>
-		<a href="004_projetosEspecificos_old.html" class="btn btn-info " id='idIncluirMaisPt01' role="button">Próximos passos</a>
+		<p:commandButton value="Próximos passos"  
+			action="#{usuarioControle.iniciarProjetosEspecificos()}" styleClass="btn btn-info" >	
+		</p:commandButton>													
+
 	</div>
 
 

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -27,15 +28,19 @@ public class Grupo implements Serializable{
     private static final long serialVersionUID = 1L;
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Grupo")
+	@SequenceGenerator(name = "id_Grupo", sequenceName = "ID_GRUPO")
+*/	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
 	
-	@Basic(optional = false)
 	@Column(name = "nome")
 	private String nome;
 	
+	@Column(name = "titulo")
+	private String titulo;
+
 	@OneToMany(mappedBy = "grupo")
 	private List<Questao> questoes;
 
@@ -73,6 +78,34 @@ public class Grupo implements Serializable{
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	/**
+	 * @return the titulo
+	 */
+	public String getTitulo() {
+		return titulo;
+	}
+
+	/**
+	 * @param titulo the titulo to set
+	 */
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	/**
+	 * @return the questoes
+	 */
+	public List<Questao> getQuestoes() {
+		return questoes;
+	}
+
+	/**
+	 * @param questoes the questoes to set
+	 */
+	public void setQuestoes(List<Questao> questoes) {
+		this.questoes = questoes;
 	}
 
     

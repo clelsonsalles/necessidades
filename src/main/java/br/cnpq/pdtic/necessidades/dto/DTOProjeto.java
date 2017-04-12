@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.cnpq.pdtic.necessidades.entities.Grupo;
-import br.cnpq.pdtic.necessidades.entities.Necessidade;
 import br.cnpq.pdtic.necessidades.entities.Questao;
 
 
@@ -30,7 +29,7 @@ public class DTOProjeto implements Serializable{
 	private List<DTONecessidade> necessidades;
 	
 	
-	public static final Integer ID_GRUPO_OUTRAS_NECESSIDADES = 4;
+	public static final Integer ID_GRUPO_OUTRAS_NECESSIDADES = 10;
 
 	
 	public static DTOProjeto converteEntity(Questao questao){

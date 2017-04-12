@@ -16,11 +16,21 @@
 		<primefaces.version>5.2</primefaces.version>
 		<primefaces-theme.version>1.0.10</primefaces-theme.version>
 		<taglibs-standard.version>1.1.2</taglibs-standard.version>
+		<version.war.plugin>2.1.1</version.war.plugin>
 	</properties>
 
 	<build>
 		<finalName>${project.artifactId}</finalName>
 		<plugins>
+			<plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${version.war.plugin}</version>
+                <configuration>
+                    <!-- Java EE doesn't require web.xml, Maven needs to catch
+                        up! -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -62,7 +72,18 @@
 			<url>http://clojars.org/repo/</url>
 		</repository>
 		
-
+        <repository>
+            <id>datanucleus</id>
+            <url>http://www.datanucleus.org/downloads/maven2/</url>
+        </repository>
+        
+        
+		<repository>
+            <id>maven2</id>
+            <url>http://central.maven.org/maven2/</url>
+        </repository>
+            
+        
 	</repositories>
 
 	<dependencyManagement>
@@ -213,11 +234,30 @@
 		    <version>9.3-1102.jdbc4</version>
 		</dependency>
 		
+		<!-- Dependência para o Oracle -->
+		<!-- https://mvnrepository.com/artifact/com.github.ferstl/spring-jdbc-oracle-ojdbc 
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+        </dependency>
+		<dependency>
+		    <groupId>com.oracle</groupId>
+		    <artifactId>ojdbc14</artifactId>
+		    <version>10.2.0.4.0</version>
+		</dependency>
+        <dependency>
+            <groupId>oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.3</version>
+        </dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		-->		
+		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc14 -->
 
 
 		<!-- JSF 2 -->

@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
@@ -28,7 +29,9 @@ public class AlinhamentoNecessidadeObjetivo implements Serializable{
     
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Basic(optional = false)
+/*	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Alinhamento")
+	@SequenceGenerator(name = "id_Alinhamento", sequenceName = "ID_ALINHAMENTO")
+*/	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;
 	

@@ -16,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -28,7 +29,9 @@ public class ObjetivoEstrategico implements Serializable{
     private static final long serialVersionUID = 1L;
     
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+/*	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Objetivo")
+	@SequenceGenerator(name = "id_Objetivo", sequenceName = "ID_OBJETIVO")
+*/	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Basic(optional = false)
 	@Column(name = "id")
 	private Integer id;

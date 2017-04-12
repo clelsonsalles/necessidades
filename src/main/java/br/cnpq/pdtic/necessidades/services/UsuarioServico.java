@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.cnpq.pdtic.necessidades.dao.AlinhamentoNecessidadeObjetivoDAO;
 import br.cnpq.pdtic.necessidades.dao.CargoDAO;
+import br.cnpq.pdtic.necessidades.dao.GrupoDAO;
 import br.cnpq.pdtic.necessidades.dao.LotacaoDAO;
 import br.cnpq.pdtic.necessidades.dao.NecessidadeDAO;
 import br.cnpq.pdtic.necessidades.dao.ObjetivoEstrategicoDAO;
@@ -22,6 +23,7 @@ import br.cnpq.pdtic.necessidades.dto.DTOProjeto;
 import br.cnpq.pdtic.necessidades.entities.AlinhamentoNecessidadeObjetivo;
 import br.cnpq.pdtic.necessidades.entities.DominioCargo;
 import br.cnpq.pdtic.necessidades.entities.DominioLotacao;
+import br.cnpq.pdtic.necessidades.entities.Grupo;
 import br.cnpq.pdtic.necessidades.entities.Necessidade;
 import br.cnpq.pdtic.necessidades.entities.ObjetivoEstrategico;
 import br.cnpq.pdtic.necessidades.entities.Questao;
@@ -47,6 +49,9 @@ public class UsuarioServico
 	@Autowired
 	private QuestaoDAO questaoDAO;
 	
+	@Autowired
+	private GrupoDAO grupoDAO;
+
 	@Autowired
 	private NecessidadeDAO necessidadeDAO;
 	
@@ -162,6 +167,27 @@ public class UsuarioServico
 		return dtos;
 	}
 
+	public List<DTOProjeto> recuperaProjetosEspecificosDGTI_E1() {
+		// Carregar os projetos especificos do serviço
+		List<DTOProjeto> dtos = new ArrayList<>();
+		
+		List<Questao> questoes = questaoDAO.recuperaListaProjetosEspecificosDGTI_E1();
+		for (Questao questao : questoes) {
+			dtos.add(DTOProjeto.converteEntity(questao));
+		}
+		return dtos;
+	}
+
+	public List<DTOProjeto> recuperaProjetosEspecificosDGTI_Outros() {
+		// Carregar os projetos especificos do serviço
+		List<DTOProjeto> dtos = new ArrayList<>();
+		
+		List<Questao> questoes = questaoDAO.recuperaListaProjetosEspecificosDGTI_Outros();
+		for (Questao questao : questoes) {
+			dtos.add(DTOProjeto.converteEntity(questao));
+		}
+		return dtos;
+	}
 
 	public List<DTONecessidade> recuperaListaNecessidades(DTOProjeto projeto, Usuario usuario) {
 		// TODO Auto-generated method stub
@@ -173,6 +199,16 @@ public class UsuarioServico
 		}
 		
 		return dtos;
+	}
+	
+	public List<Grupo> recuperaListaGruposProjetosEspecificos_semDGTI(){
+		List<Grupo> grupos = grupoDAO.recuperaListaGruposProjetosEspecificos_semDGTI();
+		return grupos;  
+	}
+	
+	public List<Questao> recuperaListaQuestoes(Grupo grupo){
+		List<Questao>  questoesGrupo = questaoDAO.recuperaQuestoes(grupo);
+		return questoesGrupo;
 	}
 
 	public Necessidade recuperaNecessidade(Integer id) {

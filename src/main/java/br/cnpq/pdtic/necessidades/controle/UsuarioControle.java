@@ -12,17 +12,20 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.cnpq.pdtic.necessidades.dto.DTOGrupo;
 import br.cnpq.pdtic.necessidades.dto.DTONecessidade;
 import br.cnpq.pdtic.necessidades.dto.DTOProjeto;
 import br.cnpq.pdtic.necessidades.entities.AlinhamentoNecessidadeObjetivo;
 import br.cnpq.pdtic.necessidades.entities.DominioCargo;
 import br.cnpq.pdtic.necessidades.entities.DominioLotacao;
+import br.cnpq.pdtic.necessidades.entities.Grupo;
 import br.cnpq.pdtic.necessidades.entities.Necessidade;
 import br.cnpq.pdtic.necessidades.entities.ObjetivoEstrategico;
 import br.cnpq.pdtic.necessidades.entities.Questao;
@@ -58,14 +61,16 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 
 	private List<DTOProjeto> projetosTransversais = new ArrayList<DTOProjeto>();
 	private List<DTOProjeto> projetosEspecificos = new ArrayList<DTOProjeto>();
+	private List<DTOProjeto> projetosEspecificosDGTI_E1 = new ArrayList<DTOProjeto>();
+	private List<DTOProjeto> projetosEspecificosDGTI_Outros = new ArrayList<DTOProjeto>();
+	
+	private List<DTOGrupo> listaGruposProjetosEspecificos_semDGTI = new ArrayList<DTOGrupo>();
 
 	private DTONecessidade necessidade;
 	
-	private String idProjetoTransversalSelecionado;
-	private String idProjetoEspecificoSelecionado;
+	private String idProjetoSelecionado;
 	
-	private Questao projetoTransversalSelecionado;
-	private Questao projetoEspecificoSelecionado;
+	private Questao projetoSelecionado;
 	
 	private Integer[] idsObjetivosCNPq = ArrayUtils.EMPTY_INTEGER_OBJECT_ARRAY;
 	private Integer[] idsObjetivosEGD = ArrayUtils.EMPTY_INTEGER_OBJECT_ARRAY;
@@ -84,7 +89,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
         
         Object data = event.getData();
         
-        setIdProjetoTransversalSelecionado(event.getTab().getTitletip());
+        setIdProjetoSelecionado(event.getTab().getTitletip());
     }
          
     public void tabProjetoTransversalFechada(TabCloseEvent event) {
@@ -93,7 +98,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
         
         Object data = event.getData();
         
-        setIdProjetoTransversalSelecionado(event.getTab().getTitletip());
+        setIdProjetoSelecionado(event.getTab().getTitletip());
     }
 
     public void onTabClose(TabCloseEvent event) {
@@ -103,21 +108,21 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     
     
     public Integer getIdProjetoTransversalSelecionadoIntger(){
-    	return idProjetoTransversalSelecionado == null ? null : Integer.parseInt(idProjetoTransversalSelecionado);
+    	return idProjetoSelecionado == null ? null : Integer.parseInt(idProjetoSelecionado);
     }
 
 	public void onTabTransversalChange(TabChangeEvent event) {
         FacesMessage msg = new FacesMessage("Tab Changed", "Active Tab: " + event.getTab().getTitle());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
-        System.out.println(idProjetoTransversalSelecionado);
+        System.out.println(idProjetoSelecionado);
     }
          
     public void onTabTransversalClose(TabCloseEvent event) {
         FacesMessage msg = new FacesMessage("Tab Closed", "Closed tab: " + event.getTab().getTitle());
         FacesContext.getCurrentInstance().addMessage(null, msg);
         
-        System.out.println(idProjetoTransversalSelecionado);
+        System.out.println(idProjetoSelecionado);
     }
 	
 	private static final String MENSAGEM_ATRASO_UNIDADE = 
@@ -131,9 +136,17 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     public void salvarNecessidade(){
 		try {
 			//TODO Salvar os dados da necessidade
-	        System.out.println(idProjetoTransversalSelecionado);
+	        System.out.println(idProjetoSelecionado);
+	        
+	        if (StringUtils.isEmpty(necessidade.getTitulo()) || 
+	        		StringUtils.isEmpty(necessidade.getDescricao()) ||
+	        		StringUtils.isEmpty(necessidade.getJustificativa()) ){
+				addMessageError("Informe Título, Descrição e Justificativa para a necessidade!");
+				return;
+	        }
+	        
 	        Necessidade necessidadeInformada = necessidade.converteDTO();
-	        necessidadeInformada.setQuestao(new Questao(Integer.parseInt(idProjetoTransversalSelecionado)));
+	        necessidadeInformada.setQuestao(new Questao(Integer.parseInt(idProjetoSelecionado)));
 	        necessidadeInformada.setUsuario(usuario);
 	        necessidadeInformada.setOrdem(1);
 	        
@@ -141,8 +154,6 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 			
 	        //RequestContext.getCurrentInstance().closeDialog("dialogNecessidade");
 	        RequestContext.getCurrentInstance().closeDialog(0);
-	        RequestContext.getCurrentInstance().closeDialog(1);
-	        RequestContext.getCurrentInstance().closeDialog(null);
 
 	        atualizaListaProjetosTransversais();
 	        atualizaListaProjetosEspecificos();
@@ -224,9 +235,9 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 		try {
 			//TODO Salvar os dados da necessidade
 			cenario = CenarioEnum.INCLUSAO;
-	        System.out.println(idProjetoTransversalSelecionado);
+	        System.out.println(idProjetoSelecionado);
 	        
-	        projetoTransversalSelecionado = usuarioServico.recuperaQuestao(Integer.parseInt(idProjetoTransversalSelecionado));
+	        projetoSelecionado = usuarioServico.recuperaQuestao(Integer.parseInt(idProjetoSelecionado));
 	        
 	        necessidade = new DTONecessidade();
 	        
@@ -384,6 +395,42 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 		}
 	}
 
+
+	
+    public List<DTOProjeto> listaProjEspE1DGTI(){
+    	if (projetosEspecificosDGTI_E1 == null || projetosEspecificosDGTI_E1.isEmpty()){
+    		atualizaListaProjEspE1DGTI();
+    	}
+    	
+    	return projetosEspecificosDGTI_E1;
+    }
+
+	private void atualizaListaProjEspE1DGTI() {
+		projetosEspecificosDGTI_E1 = usuarioServico.recuperaProjetosEspecificosDGTI_E1();
+		for (DTOProjeto projEspE1 : projetosEspecificosDGTI_E1) {
+			List<DTONecessidade> necessidades = usuarioServico.recuperaListaNecessidades(projEspE1, usuario);
+			projEspE1.setNecessidades(necessidades);
+		}
+	}
+
+
+    public List<DTOProjeto> listaProjEspDGTIOutros(){
+    	if (projetosEspecificosDGTI_Outros == null || projetosEspecificosDGTI_Outros.isEmpty()){
+    		atualizaListaProjEspDGTIOutros();
+    	}
+    	
+    	return projetosEspecificosDGTI_Outros;
+    }
+
+	private void atualizaListaProjEspDGTIOutros() {
+		projetosEspecificosDGTI_Outros = usuarioServico.recuperaProjetosEspecificosDGTI_Outros();
+		for (DTOProjeto projEspOutros : projetosEspecificosDGTI_Outros) {
+			List<DTONecessidade> necessidades = usuarioServico.recuperaListaNecessidades(projEspOutros, usuario);
+			projEspOutros.setNecessidades(necessidades);
+		}
+	}
+
+	
 	/**
 	 * Recupera a lisa de outras necessidades conforme o usuário logado
 	 */
@@ -471,7 +518,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     	
     	DTOProjeto projetoTransversalInicial = listaProjetosTransversais().get(0);
     		
-    	setIdProjetoTransversalSelecionado("" + projetoTransversalInicial.getId());
+    	setIdProjetoSelecionado("" + projetoTransversalInicial.getId());
     	
     	necessidade = new DTONecessidade();
     	
@@ -484,7 +531,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     	
     	DTOProjeto projetoEspecificoInicial = listaProjetosEspecificos().get(0);
     		
-    	setIdProjetoEspecificoSelecionado("" + projetoEspecificoInicial.getId());
+    	setIdProjetoSelecionado("" + projetoEspecificoInicial.getId());
     	
     	necessidade = new DTONecessidade();
     	
@@ -563,7 +610,14 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     public String incluirOutraNecessidade(){
 		try {
 			//TODO Salvar os dados da necessidade
-	        Necessidade necessidadeInformada = necessidade.converteDTO();
+	        if (StringUtils.isEmpty(necessidade.getTitulo()) || 
+	        		StringUtils.isEmpty(necessidade.getDescricao()) ||
+	        		StringUtils.isEmpty(necessidade.getJustificativa()) ){
+				addMessageError("Informe Título, Descrição e Justificativa para a necessidade!");
+				return null;
+	        }
+
+			Necessidade necessidadeInformada = necessidade.converteDTO();
 	        necessidadeInformada.setQuestao(usuarioServico.recuperaQuestaoOutrasNecessidade());
 	        necessidadeInformada.setUsuario(usuario);
 	        necessidadeInformada.setOrdem(1);
@@ -787,48 +841,20 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 		this.necessidade = necessidade;
 	}
 
-	public String getIdProjetoTransversalSelecionado() {
-		return idProjetoTransversalSelecionado;
+	public String getIdProjetoSelecionado() {
+		return idProjetoSelecionado;
 	}
 
-	public void setIdProjetoTransversalSelecionado(String idProjetoTransversalSelecionado) {
-		this.idProjetoTransversalSelecionado = idProjetoTransversalSelecionado;
+	public void setIdProjetoSelecionado(String idProjetoSelecionado) {
+		this.idProjetoSelecionado = idProjetoSelecionado;
 	}
 
-	public Questao getProjetoTransversalSelecionado() {
-		return projetoTransversalSelecionado;
+	public Questao getProjetoSelecionado() {
+		return projetoSelecionado;
 	}
 
-	public void setProjetoTransversalSelecionado(Questao projetoTransversalSelecionado) {
-		this.projetoTransversalSelecionado = projetoTransversalSelecionado;
-	}
-
-	/**
-	 * @return the idProjetoEspecificoSelecionado
-	 */
-	public String getIdProjetoEspecificoSelecionado() {
-		return idProjetoEspecificoSelecionado;
-	}
-
-	/**
-	 * @param idProjetoEspecificoSelecionado the idProjetoEspecificoSelecionado to set
-	 */
-	public void setIdProjetoEspecificoSelecionado(String idProjetoEspecificoSelecionado) {
-		this.idProjetoEspecificoSelecionado = idProjetoEspecificoSelecionado;
-	}
-
-	/**
-	 * @return the projetoEspecificoSelecionado
-	 */
-	public Questao getProjetoEspecificoSelecionado() {
-		return projetoEspecificoSelecionado;
-	}
-
-	/**
-	 * @param projetoEspecificoSelecionado the projetoEspecificoSelecionado to set
-	 */
-	public void setProjetoEspecificoSelecionado(Questao projetoEspecificoSelecionado) {
-		this.projetoEspecificoSelecionado = projetoEspecificoSelecionado;
+	public void setProjetoSelecionado(Questao projetoTransversalSelecionado) {
+		this.projetoSelecionado = projetoTransversalSelecionado;
 	}
 
 	/**
@@ -917,6 +943,63 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	 */
 	public void setListaOutrasNecessidades(List<DTONecessidade> listaOutrasNecessidades) {
 		this.listaOutrasNecessidades = listaOutrasNecessidades;
+	}
+	
+	
+	/**
+	 * Monta uma lista com os ids dos accordions para os grupo de projetos específicos
+	 * 
+	 * @return - uma lista com os ids dos accordions para os grupo de projetos específicos, iniciada e separada com vírgulas
+	 */
+	public String listaPaineisAccordionEspecificos(){
+		String retorno = "";
+		List<DTOGrupo> gruposProjetoEspecifico = getListaGruposProjetosEspecificos_semDGTI();
+		for (DTOGrupo grupoProjetoEspecifico : gruposProjetoEspecifico) {
+			retorno += ", #accordionGrupo_" + grupoProjetoEspecifico.getId();
+		}
+		
+		
+		return retorno;
+	}
+	
+	
+
+	/**
+	 * @return the listaGruposProjetosEspecificos_semDGTI
+	 */
+	public List<DTOGrupo> getListaGruposProjetosEspecificos_semDGTI() {
+		if (listaGruposProjetosEspecificos_semDGTI == null || listaGruposProjetosEspecificos_semDGTI.isEmpty()){
+			
+			List<Grupo> grupos = usuarioServico.recuperaListaGruposProjetosEspecificos_semDGTI();
+			List<DTOGrupo> retorno = new ArrayList<DTOGrupo>();
+			for (Grupo grupo : grupos) {
+				List<Questao> questoesGrupo = usuarioServico.recuperaListaQuestoes(grupo);
+				grupo.setQuestoes(questoesGrupo);
+				
+				// Converte em dtogrupo, contendo a lista de questões
+				DTOGrupo grupoDTO = DTOGrupo.converteEntity(grupo);
+				retorno.add(grupoDTO);
+			}
+			
+			listaGruposProjetosEspecificos_semDGTI = retorno;
+		}
+		// Mantém a lista de necessidades atualizada (considerando a questão e o usuário logado)
+		for (DTOGrupo grupoDTO : listaGruposProjetosEspecificos_semDGTI ) {
+			List<DTOProjeto> projetosGrupo = grupoDTO.getQuestoes();
+			for (DTOProjeto dtoProjeto : projetosGrupo) {
+				List<DTONecessidade> necessidadesQuestao = usuarioServico.recuperaListaNecessidades(dtoProjeto, usuario);
+				dtoProjeto.setNecessidades(necessidadesQuestao);
+			}
+		}
+			
+		return listaGruposProjetosEspecificos_semDGTI;
+	}
+
+	/**
+	 * @param listaGruposProjetosEspecificos_semDGTI the listaGruposProjetosEspecificos_semDGTI to set
+	 */
+	public void setListaGruposProjetosEspecificos_semDGTI(List<DTOGrupo> listaGruposProjetosEspecificos_semDGTI) {
+		this.listaGruposProjetosEspecificos_semDGTI = listaGruposProjetosEspecificos_semDGTI;
 	}
 	
 	
