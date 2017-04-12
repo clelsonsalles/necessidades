@@ -461,41 +461,33 @@
 
 </h:form>
 </div>
-		  
-		
+</div>
+<!-- /#wrapper -->
 
+<script type="text/javascript">
+  $(document).ready(function(){
 
-		
-
-		
-		
-
-
-    </div>
-    <!-- /#wrapper -->
-
-
-
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-
-        $("#panelDGTI").click(function(){
-        	$("#accordionDGTI #{usuarioControle.listaPaineisAccordionEspecificos()}").hide(1000);
+      $("#panelDGTI").click(function(){
+      	$("#accordionDGTI #{usuarioControle.listaPaineisAccordionEspecificos()}").hide(1000);
 		$("#accordionDGTI").show(1000);
-        });
+      });
 
-		<ui:repeat var="grupoSemDGTI" value="#{usuarioControle.listaGruposProjetosEspecificos_semDGTI}">
-        $("#panel#{grupoSemDGTI.id}").click(function(){
-        	$("#accordionDGTI #{usuarioControle.listaPaineisAccordionEspecificos()}").hide(1000);
+	<ui:repeat var="grupoSemDGTI" value="#{usuarioControle.listaGruposProjetosEspecificos_semDGTI}">
+      $("#panel#{grupoSemDGTI.id}").click(function(){
+      	$("#accordionDGTI #{usuarioControle.listaPaineisAccordionEspecificos()}").hide(1000);
 		$("#accordionGrupo_#{grupoSemDGTI.id}").show(1000);
-        });
-		</ui:repeat>
-
-    });
-    </script>
+	  });
+	</ui:repeat>
+  });
+  </script>
 		
+
+
+<!--Inclusão da dialog de Necessidades-->
+<ui:include src="/pdtic/viewNecessidade.xhtml"/>
 		
 	</ui:define>
 </ui:composition>
+
+
 

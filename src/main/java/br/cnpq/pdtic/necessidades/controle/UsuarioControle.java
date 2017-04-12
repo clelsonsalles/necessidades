@@ -141,7 +141,8 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        if (StringUtils.isEmpty(necessidade.getTitulo()) || 
 	        		StringUtils.isEmpty(necessidade.getDescricao()) ||
 	        		StringUtils.isEmpty(necessidade.getJustificativa()) ){
-				addMessageError("Informe Título, Descrição e Justificativa para a necessidade!");
+		        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
+		        addMessageError("Informe Título, Descrição e Justificativa para a necessidade!");
 				return;
 	        }
 	        
@@ -153,7 +154,9 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        usuarioServico.incluirNecessidade(necessidadeInformada);
 			
 	        //RequestContext.getCurrentInstance().closeDialog("dialogNecessidade");
-	        RequestContext.getCurrentInstance().closeDialog(0);
+	        //RequestContext.getCurrentInstance().closeDialog(0);
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
+
 
 	        atualizaListaProjetosTransversais();
 	        atualizaListaProjetosEspecificos();
@@ -182,10 +185,13 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        necessidadeInformada.setJustificativa(necessidade.getJustificativa());
  
 	        usuarioServico.editarNecessidade(necessidadeInformada);
-			
+/*			
 	        RequestContext.getCurrentInstance().closeDialog(0);
 	        RequestContext.getCurrentInstance().closeDialog(1);
 	        RequestContext.getCurrentInstance().closeDialog(null);
+	        
+*/	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
+
 
 	        atualizaListaProjetosTransversais();
 	        atualizaListaProjetosEspecificos();
@@ -209,10 +215,13 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        Necessidade necessidadeInformada = usuarioServico.recuperaNecessidade(necessidade.getId());
 
 	        usuarioServico.excluirNecessidade(necessidadeInformada);
-
+/*
 	        RequestContext.getCurrentInstance().closeDialog(0);
 	        RequestContext.getCurrentInstance().closeDialog(1);
 	        RequestContext.getCurrentInstance().closeDialog(null);
+*/	        
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
+
 
 	        atualizaListaProjetosTransversais();
 	        atualizaListaProjetosEspecificos();
@@ -240,11 +249,14 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        projetoSelecionado = usuarioServico.recuperaQuestao(Integer.parseInt(idProjetoSelecionado));
 	        
 	        necessidade = new DTONecessidade();
-	        
+/*	        
 	        Map<String,Object> options = new HashMap<String, Object>();
 	        options.put("resizable", false);
 	        //options.put("widgetVar", "dialogNecessidade");
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
+*/	        
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
+
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -259,11 +271,13 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 			cenario = CenarioEnum.EDICAO;
 	        necessidade = DTONecessidade.converteEntity(usuarioServico.recuperaNecessidade(necessidade.getId()));
 	        
-	        Map<String,Object> options = new HashMap<String, Object>();
+/*
+ 	        Map<String,Object> options = new HashMap<String, Object>();
 	        options.put("resizable", false);
-	        //options.put("widgetVar", "dialogNecessidade");
+	        options.put("widgetVar", "dialogNecessidade");
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
-
+*/
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			addMessageError("Problemas no registro da necessidade!");
@@ -276,11 +290,13 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 			cenario = CenarioEnum.EXCLUSAO;
 	        
 	        necessidade = DTONecessidade.converteEntity(usuarioServico.recuperaNecessidade(necessidade.getId()));
-	        
+/*	        
 	        Map<String,Object> options = new HashMap<String, Object>();
 	        options.put("resizable", false);
 	        //options.put("widgetVar", "dialogNecessidade");
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
+*/
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -345,7 +361,10 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 
     
     public void sairViewNecessidade(){
-        RequestContext.getCurrentInstance().closeDialog(0);
+//        RequestContext.getCurrentInstance().closeDialog(0);
+        
+        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
+
     	
     }
     

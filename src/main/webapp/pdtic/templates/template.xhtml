@@ -34,6 +34,9 @@
 			width: 800px;
 			height: 500px;
 		}
+		.dialogNecessidade{
+			top: 80px !important;
+		}
 	</style>
     <div id="wrapper">
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -75,7 +78,7 @@
                     <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
                     	<h:commandLink action="#{usuarioControle.iniciarOutrasNecessidades()}" 
                     		value=" Outras Necessidades" 
-                    		styleClass="glyphicon glyphicon-transfer #{usuarioControle.informouLeitura ? 'disabled' : ''}"></h:commandLink>
+                    		styleClass="glyphicon glyphicon-cog #{usuarioControle.informouLeitura ? 'disabled' : ''}"></h:commandLink>
                     </li>
                     <li class="#{usuarioControle.informouLeitura ? '' : 'disabled'}">
                     	<a href="006_finalizacao.xhtml"  class="#{usuarioControle.informouLeitura ? 'disabled' : ''}">
