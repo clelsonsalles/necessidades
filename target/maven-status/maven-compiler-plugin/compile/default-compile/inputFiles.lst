@@ -16,6 +16,7 @@
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/entities/AlinhamentoNecessidadeObjetivo.java
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/entities/enums/CenarioEnum.java
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/dao/LotacaoDAO.java
+/opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/dto/DTOGrupo.java
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/dao/AlinhamentoNecessidadeObjetivoDAO.java
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/dao/AbstractDAO.java
 /opt/_desenv/necessidades/src/main/java/br/cnpq/pdtic/necessidades/entities/enums/DominioCargoEnum.java

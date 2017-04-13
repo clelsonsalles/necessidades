@@ -21,7 +21,7 @@ INSERT INTO dominiocargo(nome) values('Chefe de Serviço');
 INSERT INTO dominiolotacao(nome) values('DCOI');
 INSERT INTO dominiolotacao(nome) values('DEHS');
 INSERT INTO dominiolotacao(nome) values('DABS');
-INSERT INTO dominiolotacao(nome) values('GTI');
+INSERT INTO dominiolotacao(nome) values('DGTI');
 INSERT INTO dominiolotacao(nome) values('PRESIDÊNCIA');
 
 
@@ -42,11 +42,11 @@ INSERT INTO grupo(nome, titulo) values('Outras Necessidades', 'Outras Necessidad
 --Questao 
 INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T1',  1, 'Criar e implementar sistemática de Monitoramento e Avaliação do Plano. Estratégico, subsidiando a DEX na condução das Reuniões de Análise da Estratégia.',  'Consolidar a cultura do planejamento estratégico e da avaliação continuada das atividades do CNPq, considerado um valioso instrumento de gestão da alta administração. \nO monitoramento e a avaliação da estratégia fazem parte do ciclo da Gestão. Essa sistemática permitirá que as ações planejadas aconteçam de fato, com ajustes e correções de rumos sempre que necessário, agregando valor e dando visibilidade aos resultados institucionais.', 1);
 INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T2',  2, 'Criar e implementar novo Modelo de Monitoramento, Avaliação e disponibilização de resultados de Bolsas, no País e no exterior, de Auxílios Individuais, de Chamadas e Encomendas, e de Projetos de Pesquisa.',  'Há uma demanda crescente por transparência e feedback por parte da sociedade civil para legitimar o financiamento de projetos de quaisquer natureza, com a exigência de retorno efetivo e impacto positivo voltado ao bem estar individual, coletivo e ambiental. Dessa forma, o desenvolvimento de monitoramento e avaliação, bem divulgação de resultados e impactos são e para a manutenção do CNPq como entidade de fomento a pesquisa com uso de recursos do erário e de outras fontes de recurso cabíveis dentro da devida oportunidade e conveniências',  1);
-INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T3',  3, 'T3',  'DESCRICAO DO T3',  1);
-INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T4',  4, 'T4',  'DESCRICAO DO T4',  1);
-INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T5',  5, 'T5',  'DESCRICAO DO T5',  1);
-INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T6',  6, 'T6',  'DESCRICAO DO T6',  1);
-INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T7',  7, 'T7',  'DESCRICAO DO T7',  1);
+INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T3',  3, 'T3',  'Reunir, rever, alinhar e formalizar parâmetros de negociação, para identificar, prospectar, atrair e estabelecer novos Acordos de Cooperação, nacionais e internacionais',  1);
+INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T4',  4, 'T4',  'Avaliar   e   propor   a   reestruturação   do   Modelo   de Fomento,  contemplando inovação,  transversalidade  e transdisciplinaridade   na    promoção   da    pesquisa   e desenvolvimento tecnológico, considerando os subprojetos:<ul><li>Fomentar  projetos  inovadores  em  PD&I  de  alto risco por meio de chamadas específicas.</li><li>Criar e ou adequar ferramentas para recebimento e incentivo de propostas em rede.</li><li>Avaliar  e  propor  a  reestruturação  da  lógica  de organização dos Comitês de Assessoramento.</li><li>Realizar  revisão  da  lógica  de  distribuição  de recursos   orçamentários   de   fomento   à   pesquisa   e bolsas.</li></ul>',  1);
+INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T5',  5, 'T5',  'Implementar Plano de Monitoramento e Avaliação de Convênios e Acordos de Cooperação Nacionais.',  1);
+INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T6',  6, 'T6',  'Realizar revisão completa de normas relacionadas às atividades das Diretorias.',  1);
+INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('Projeto Transversal T7',  7, 'T7',  'Realizar mapeamento dos processos de trabalho do CNPq.',  1);
 --INSERT INTO questao(nome, ordem, descricao, justificativa, grupo) values ('', '', '', 0, 1);
 
 

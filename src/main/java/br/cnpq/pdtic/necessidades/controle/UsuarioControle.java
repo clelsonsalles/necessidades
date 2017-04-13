@@ -2,14 +2,12 @@ package br.cnpq.pdtic.necessidades.controle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
@@ -17,6 +15,7 @@ import org.primefaces.context.RequestContext;
 import org.primefaces.event.TabChangeEvent;
 import org.primefaces.event.TabCloseEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import br.cnpq.pdtic.necessidades.dto.DTOGrupo;
@@ -38,8 +37,9 @@ import br.cnpq.pdtic.necessidades.util.PasswordUtils;
 
 
 @ManagedBean(name="usuarioControle")
-@SessionScoped
+@ViewScoped
 @Component
+@Scope("session")
 public class UsuarioControle extends AbstractControle implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -141,6 +141,8 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        if (StringUtils.isEmpty(necessidade.getTitulo()) || 
 	        		StringUtils.isEmpty(necessidade.getDescricao()) ||
 	        		StringUtils.isEmpty(necessidade.getJustificativa()) ){
+
+	        	RequestContext.getCurrentInstance().update("idFormNecessidades");
 		        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
 		        addMessageError("Informe Título, Descrição e Justificativa para a necessidade!");
 				return;
@@ -159,6 +161,8 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 
 
 	        atualizaListaProjetosTransversais();
+	        atualizaListaProjEspE1DGTI();
+	        atualizaListaProjEspDGTIOutros();
 	        atualizaListaProjetosEspecificos();
 
 	        addMessageInfo("A necessidade foi registrada com sucesso");
@@ -190,14 +194,17 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        RequestContext.getCurrentInstance().closeDialog(1);
 	        RequestContext.getCurrentInstance().closeDialog(null);
 	        
-*/	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
+*/	        
+	    	RequestContext.getCurrentInstance().update("idFormNecessidades");
+	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
 
 
 	        atualizaListaProjetosTransversais();
+	        atualizaListaProjEspE1DGTI();
+	        atualizaListaProjEspDGTIOutros();
 	        atualizaListaProjetosEspecificos();
 
 	        addMessageInfo("A necessidade foi alterada com sucesso");
-	        RequestContext.getCurrentInstance().update("idFormNecessidades");
 
 //	        return "/pdtic/003_projetosTransversais.xhtml";
 	        
@@ -224,6 +231,8 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 
 
 	        atualizaListaProjetosTransversais();
+	        atualizaListaProjEspE1DGTI();
+	        atualizaListaProjEspDGTIOutros();
 	        atualizaListaProjetosEspecificos();
 
 	        addMessageInfo("A necessidade foi excluída com sucesso");
@@ -256,6 +265,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
 */	        
 	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
+	    	RequestContext.getCurrentInstance().update("idFormNecessidades");
 
 
 		} catch (Exception e) {
@@ -278,6 +288,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
 */
 	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
+	    	RequestContext.getCurrentInstance().update("idFormNecessidades");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			addMessageError("Problemas no registro da necessidade!");
@@ -297,6 +308,7 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	        RequestContext.getCurrentInstance().openDialog("viewNecessidade", options, null);
 */
 	        RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').show()"); 
+	    	RequestContext.getCurrentInstance().update("idFormNecessidades");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -363,25 +375,12 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     public void sairViewNecessidade(){
 //        RequestContext.getCurrentInstance().closeDialog(0);
         
+    	RequestContext.getCurrentInstance().update("idFormNecessidades");
         RequestContext.getCurrentInstance().execute("PF('dialogNecessidades').hide()"); 
 
     	
     }
     
-/*    
-    @PostConstruct
-    public void init() {
-    	try {
-    		usuario = new Usuario();
-    		listaLotacao = usuarioServico.recuperaListaLotacao();
-    		listaCargo = usuarioServico.recuperaListaCargo();
-			
-		} catch (Exception e) {
-			addMessageError("Problemas na recuperação dos dados!");
-			e.printStackTrace();
-		}
-    }
-*/    
     
 	public String iniciarCadastrarUsuario() {
     	try {
@@ -725,7 +724,16 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     	
     }
 
-
+    public String logout(){
+    	
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        addMessageInfo("Você pode retornar a este Levantamento mais tarde.");
+        // Configura os dados iniciais para o levantamento
+        iniciarCadastrarUsuario();
+    	
+		return "/pdtic/001_inicio.xhtml";
+    }
+    
     public String finalizarLevantamento(){
     	try {
     		usuario.setFinalizado(true);
@@ -765,6 +773,18 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	 * @return the listaLotacao
 	 */
 	public List<DominioLotacao> getListaLotacao() {
+		if (listaLotacao == null || listaLotacao.isEmpty()){
+			try {
+				listaLotacao = usuarioServico.recuperaListaLotacao();
+				listaCargo = usuarioServico.recuperaListaCargo();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				addMessageError("Problemas na recuperação de dados!");
+				e.printStackTrace();
+			}
+
+		}
 		return listaLotacao;
 	}
 
@@ -793,6 +813,18 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	 * @return the listaCargo
 	 */
 	public List<DominioCargo> getListaCargo() {
+		if (listaCargo == null || listaCargo.isEmpty()){
+			try {
+				listaLotacao = usuarioServico.recuperaListaLotacao();
+				listaCargo = usuarioServico.recuperaListaCargo();
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				addMessageError("Problemas na recuperação de dados!");
+				e.printStackTrace();
+			}
+
+		}
 		return listaCargo;
 	}
 

@@ -2,6 +2,7 @@ br/cnpq/pdtic/necessidades/entities/enums/DominioLotacaoEnum.class
 br/cnpq/pdtic/necessidades/entities/enums/DominioCargoEnum.class
 br/cnpq/pdtic/necessidades/dao/NecessidadeDAO.class
 br/cnpq/pdtic/necessidades/entities/Questao.class
+br/cnpq/pdtic/necessidades/dao/GrupoDAO.class
 br/cnpq/pdtic/necessidades/entities/ObjetivoEstrategico.class
 br/cnpq/pdtic/necessidades/util/JSFUtils.class
 br/cnpq/pdtic/necessidades/util/PasswordUtils.class
@@ -10,6 +11,7 @@ br/cnpq/pdtic/necessidades/entities/AlinhamentoNecessidadeObjetivo.class
 br/cnpq/pdtic/necessidades/entities/DominioLotacao.class
 br/cnpq/pdtic/necessidades/services/UsuarioServico.class
 br/cnpq/pdtic/necessidades/dto/DTOProjeto.class
+br/cnpq/pdtic/necessidades/dto/DTOGrupo.class
 br/cnpq/pdtic/necessidades/dao/AlinhamentoNecessidadeObjetivoDAO.class
 br/cnpq/pdtic/necessidades/entities/DominioCargo.class
 br/cnpq/pdtic/necessidades/entities/Usuario.class
