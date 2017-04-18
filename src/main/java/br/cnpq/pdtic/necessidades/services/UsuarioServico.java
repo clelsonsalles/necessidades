@@ -29,10 +29,7 @@ import br.cnpq.pdtic.necessidades.entities.ObjetivoEstrategico;
 import br.cnpq.pdtic.necessidades.entities.Questao;
 import br.cnpq.pdtic.necessidades.entities.Usuario;
 
-/**
- * @author Siva
- *
- */
+
 public class UsuarioServico 
 {
 	
@@ -78,7 +75,14 @@ public class UsuarioServico
 		
 	}
     
-	@Transactional
+    public boolean verificaEmailCadastrado(String email) throws Exception {
+
+    	Usuario usuario = usuarioDAO.findByEmail(email);
+    	return usuario != null && usuario.getIdUsuario() != null;
+		
+	}
+
+    @Transactional
     public void atualizarUsuario(Usuario usuario) throws Exception {
 
 		usuarioDAO.atualizarUsuario(usuario);

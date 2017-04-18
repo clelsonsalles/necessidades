@@ -31,7 +31,7 @@ public class AlinhamentoNecessidadeObjetivoDAO extends AbstractDAO<AlinhamentoNe
 
     @Override
     public String getNomeEntidade() {
-        return "AlinhamentoNecessidadeObjetivo";
+        return "alinhamentoNecessidadeObjetivo";
     }
     
     

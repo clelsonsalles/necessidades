@@ -32,7 +32,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 
     @Override
     public String getNomeEntidade() {
-        return "Usuário";
+        return "usuario";
     }
 
     public void criarUsuario(Usuario usuario) throws Exception {

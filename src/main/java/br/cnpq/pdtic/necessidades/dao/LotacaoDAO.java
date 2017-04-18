@@ -30,7 +30,7 @@ public class LotacaoDAO extends AbstractDAO<DominioLotacao> {
 
     @Override
     public String getNomeEntidade() {
-        return "Lotação";
+        return "lotacao";
     }
 
 

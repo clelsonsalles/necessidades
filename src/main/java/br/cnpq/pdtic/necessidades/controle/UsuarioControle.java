@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import br.cnpq.pdtic.necessidades.dto.DTOGrupo;
 import br.cnpq.pdtic.necessidades.dto.DTONecessidade;
 import br.cnpq.pdtic.necessidades.dto.DTOProjeto;
+import br.cnpq.pdtic.necessidades.dto.DTORelatorio;
 import br.cnpq.pdtic.necessidades.entities.AlinhamentoNecessidadeObjetivo;
 import br.cnpq.pdtic.necessidades.entities.DominioCargo;
 import br.cnpq.pdtic.necessidades.entities.DominioLotacao;
@@ -32,6 +33,7 @@ import br.cnpq.pdtic.necessidades.entities.Usuario;
 import br.cnpq.pdtic.necessidades.entities.enums.CenarioEnum;
 import br.cnpq.pdtic.necessidades.entities.enums.DominioCargoEnum;
 import br.cnpq.pdtic.necessidades.entities.enums.DominioLotacaoEnum;
+import br.cnpq.pdtic.necessidades.services.RelatorioServico;
 import br.cnpq.pdtic.necessidades.services.UsuarioServico;
 import br.cnpq.pdtic.necessidades.util.PasswordUtils;
 
@@ -46,6 +48,9 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 
 	@Autowired
 	private UsuarioServico usuarioServico;
+
+	@Autowired
+	private RelatorioServico relatorioServico;
 
 	private Usuario usuario = new Usuario();
 	
@@ -79,8 +84,9 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	private List<ObjetivoEstrategico> objetivosEGD = new ArrayList<ObjetivoEstrategico>();
 	
 	private List<DTONecessidade> listaOutrasNecessidades = new ArrayList<DTONecessidade>();
-	
+
 	private CenarioEnum cenario = CenarioEnum.INICIAL;
+
 	
 
     public void tabProjetoTransversalAlterada(TabChangeEvent event) {
@@ -479,6 +485,13 @@ public class UsuarioControle extends AbstractControle implements Serializable {
     	if (validaCamposCadastro()){
     		
     		try {
+    			// Verifica se o e-mail já está cadastrado
+    			if (usuarioServico.verificaEmailCadastrado(usuario.getEmail())){
+    				addMessageInfo("O e-mail informado já está cadastrado.");
+    				return null;
+   				
+    			}
+    			
     			//Gera hash MD5 da senha informada
     			usuario.setSenha(PasswordUtils.getMD5(usuario.getSenha()));
     			usuarioServico.criarUsuario(usuario);
@@ -1052,8 +1065,8 @@ public class UsuarioControle extends AbstractControle implements Serializable {
 	public void setListaGruposProjetosEspecificos_semDGTI(List<DTOGrupo> listaGruposProjetosEspecificos_semDGTI) {
 		this.listaGruposProjetosEspecificos_semDGTI = listaGruposProjetosEspecificos_semDGTI;
 	}
-	
-	
+
+
 	
 	
 	/**

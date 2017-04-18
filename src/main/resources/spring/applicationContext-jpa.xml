@@ -68,9 +68,10 @@
 				<prop key="hibernate.default_schema">${hibernate.default_schema}</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop> 
 				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				
+				<prop key="hibernate.hbm2ddl.import_files">cargaInicial.sql</prop>
 				-->
 				<prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-				<prop key="hibernate.hbm2ddl.import_files">cargaInicial.sql</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.enable_lazy_load_no_trans">true</prop>
 
@@ -92,4 +93,5 @@
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
 	<bean id="usuarioServico" class="br.cnpq.pdtic.necessidades.services.UsuarioServico" />
+	<bean id="relatorioServico" class="br.cnpq.pdtic.necessidades.services.RelatorioServico" />
 </beans>

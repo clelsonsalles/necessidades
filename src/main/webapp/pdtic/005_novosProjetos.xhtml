@@ -144,14 +144,14 @@
 					<div class="col-lg-12" style="padding-top: 15px">
 						<p:outputLabel for="necessidade" styleClass="col-lg-2" value="Necessidade:"></p:outputLabel>
 					    <div class="col-lg-10">
-				               <p:inputText class="form-control" placeholder="Nome da Necessidade" 
+				               <p:inputText class="form-control" placeholder="Nome da Necessidade" maxlength="200"
 				               		id="necessidade" value="#{usuarioControle.necessidade.titulo}"/>
 					    </div>
 					</div>
 					<div class="col-lg-12">
 						<p:outputLabel for="descricao" styleClass="col-lg-2" value="Descrição:"></p:outputLabel>
 					    <div class="col-lg-10">
-				               <p:inputTextarea styleClass="form-control" id="descricao"
+				               <p:inputTextarea styleClass="form-control" id="descricao" maxlength="500"
 				               		placeholder="Qual a necessidade (nível tático/gerencial) que você descreveria para a melhoria das atividades e ações de TIC no CNPq? " 
 				               		value="#{usuarioControle.necessidade.descricao}" rows="3" cols="30" ></p:inputTextarea>
 					    </div>
@@ -159,7 +159,7 @@
 					<div class="col-lg-12">
 						<p:outputLabel for="justificativa" styleClass="col-lg-2" value="Justificativa:"></p:outputLabel>
 					    <div class="col-lg-10">
-				               <p:inputTextarea styleClass="form-control" id="justificativa"
+				               <p:inputTextarea styleClass="form-control" id="justificativa" maxlength="1000"
 				               		placeholder="Finalize com uma breve justificativa que poderemos utilizar para priorizar a necessidade ao desenvolvimento de projetos  de TIC." 
 				               		value="#{usuarioControle.necessidade.justificativa}" rows="3" cols="30" ></p:inputTextarea>
 					    </div>

@@ -30,7 +30,7 @@ public class CargoDAO extends AbstractDAO<DominioCargo> {
 
     @Override
     public String getNomeEntidade() {
-        return "Cargo";
+        return "cargo";
     }
 
 	public List<DominioCargo> recuperaListaCargo() throws Exception {

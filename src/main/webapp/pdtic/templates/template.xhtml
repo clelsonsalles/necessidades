@@ -85,6 +85,12 @@
                     		<i class="glyphicon glyphicon-check"></i> Finalização</a>
                     </li>
                     <li><a href="glossario.xhtml"><i class="glyphicon glyphicon-list-alt"></i> Glossário</a></li>
+                    <li>
+                    	<h:commandLink action="#{chartView.iniciaRelatorio}" 
+                    		value=" Relatórios"  
+                    		styleClass="glyphicon glyphicon-transfer "></h:commandLink>
+                    
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right navbar-user">
                     <li class="dropdown messages-dropdown" style="display: #{usuarioControle.usuario.idUsuario != null ? 'none' : ''}">

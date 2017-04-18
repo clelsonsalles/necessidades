@@ -31,7 +31,7 @@ public class ObjetivoEstrategicoDAO extends AbstractDAO<ObjetivoEstrategico> {
 
     @Override
     public String getNomeEntidade() {
-        return "ObjetivoEstrategico";
+        return "objetivoEstrategico";
     }
 
 	public List<ObjetivoEstrategico> recuperaListaObjetivosCNPq() throws Exception {

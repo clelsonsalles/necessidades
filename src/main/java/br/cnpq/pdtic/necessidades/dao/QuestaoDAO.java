@@ -32,7 +32,7 @@ public class QuestaoDAO extends AbstractDAO<Questao> {
 
     @Override
     public String getNomeEntidade() {
-        return "Questão";
+        return "questao";
     }
 
     public List<Questao> recuperaListaProjetosTransversais(){

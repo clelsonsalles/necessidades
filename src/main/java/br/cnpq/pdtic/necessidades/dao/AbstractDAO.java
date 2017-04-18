@@ -158,7 +158,7 @@ public abstract class AbstractDAO<T> {
     }
 
     public T getObject(String entityMethod, HashMap<String, ?> map) throws Exception {
-        Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + "." + entityMethod);
+        Query query = getEntityManager().createNamedQuery(getNomeEntidade() + "." + entityMethod);
 
         for (String key : map.keySet())
             query.setParameter(key, map.get(key));
@@ -226,7 +226,7 @@ public abstract class AbstractDAO<T> {
     }
 
     public List<T> getList(String entityMethod, HashMap<String, ?> map) throws Exception {
-        Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + "." + entityMethod);
+        Query query = getEntityManager().createNamedQuery(getNomeEntidade() + "." + entityMethod);
         List<T> res = new ArrayList<T>();
         try {
             for (String key : map.keySet())
@@ -261,7 +261,7 @@ public abstract class AbstractDAO<T> {
     }
 
     public List<T> getList(String entityMethod, HashMap<String, ?> map, int first, int qtd) throws Exception {
-        Query query = getEntityManager().createNamedQuery(getEntityClass().getSimpleName() + "." + entityMethod);
+        Query query = getEntityManager().createNamedQuery(getNomeEntidade() + "." + entityMethod);
         List<T> res = new ArrayList<T>();
         try {
             for (String key : map.keySet())

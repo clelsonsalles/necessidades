@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+
+
+	<h:form id="formListaNecessidade">		
+	    <div class="col-lg-12" style="padding-top: 15px">
+	    
+		    <div class="col-lg-12" >
+		    
+			    <div class="col-lg-4 text-center" >
+					<p:chart type="metergauge" model="#{chartView.calibradorGraficoUsuariosModel}" style="width:400px;height:230px" />	
+		    	</div>
+			    <div class="col-lg-4 text-center" >
+					<p:chart type="metergauge" model="#{chartView.calibradorGraficoNecessidadesModel}" style="width:400px;height:230px" />
+				</div>		    
+			    <div class="col-lg-4 text-center" >
+					<p:chart type="pie" model="#{chartView.pizzaTotalNecessidadeLotacao}" style="width:320px;height:240px" />
+				</div>		    
+		    </div>
+		    <div class="col-lg-12" >
+		    
+		    
+				  <div class="panel-group" id="accordion">
+						<ui:repeat value="#{chartView.listaTodasNecessidades}" var="necessidade">
+						    <div class="panel panel-default">
+						      <div class="panel-heading " style="background-color: #2fa4e7; color: #fff">
+						        <h4 class="panel-title">
+						          <a data-toggle="collapse" data-parent="#accordion" href="#collapse#{necessidade.id}" 
+						          	style="color: white; text-decoration: none; padding-top: 10px" >
+									#{necessidade.titulo}
+									</a>
+						        </h4>
+						      </div>
+						      <div id="collapse#{necessidade.id}" class="panel-collapse collapse #{necessidade.id == 1 ? 'in' : ''}">
+								<div class="panel-body" style="padding-top: 0px; font-size: 0.9em">			
+									<div class="col-lg-12" style='padding-top: 10px; '>
+										<div class="alert alert-dismissable alert-info">
+											Necessidade:
+											<p style='padding-left: 30px; font-size: 1.2em'>
+											#{necessidade.titulo}
+											</p>
+											Descrição:
+											<p style='padding-left: 30px;'>
+												#{necessidade.descricao}
+											</p>
+											Objetivo/Justificativa:
+											<p style='padding-left: 30px;'>
+												#{necessidade.justificativa}
+											</p>
+										</div>
+									</div>
+								</div>
+							</div>    
+							</div>    
+					    </ui:repeat>
+					</div>
+		    
+		    </div>
+	    </div>
+
+
+	</h:form>	
+	
+
+    <script type="text/javascript">
+
+    </script>
+
+</ui:composition>

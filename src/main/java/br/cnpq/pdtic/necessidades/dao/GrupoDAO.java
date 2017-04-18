@@ -32,7 +32,7 @@ public class GrupoDAO extends AbstractDAO<Grupo> {
 
     @Override
     public String getNomeEntidade() {
-        return "Questão";
+        return "grupo";
     }
 
     public List<Grupo> recuperaListaGruposProjetosEspecificos_semDGTI(){
