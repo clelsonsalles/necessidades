@@ -21,11 +21,7 @@ public class DTORelatorio implements Serializable{
     private Integer totalUsuariosFinalizados;
     
     private Integer totalNecessidades;
-    private Integer totalNecessidadesAlinhadasCNPq;
-    private Integer totalNecessidadesAlinhadasEGD;
-    private Integer totalNecessidadesProjetosTransversais;
-    private Integer totalNecessidadesProjetosEspecificos;
-    private Integer totalNecessidadesOutras;
+
     
     
     private List<DTOChaveValor> totalNecessidadesLotacao = new ArrayList<DTOChaveValor>();
@@ -36,6 +32,7 @@ public class DTORelatorio implements Serializable{
     private List<DTOChaveValor> totalUsuariosCargo = new ArrayList<DTOChaveValor>();
     private List<DTOChaveValor> totalUsuariosUnidade = new ArrayList<DTOChaveValor>();
     
+    private List<DTOChaveValor> alinhamentosEstrategicos = new ArrayList<DTOChaveValor>();
     
 	/**
 	 * @return the totalUsuarios
@@ -72,66 +69,6 @@ public class DTORelatorio implements Serializable{
 	 */
 	public void setTotalNecessidades(Integer totalNecessidades) {
 		this.totalNecessidades = totalNecessidades;
-	}
-	/**
-	 * @return the totalNecessidadesAlinhadasCNPq
-	 */
-	public Integer getTotalNecessidadesAlinhadasCNPq() {
-		return totalNecessidadesAlinhadasCNPq;
-	}
-	/**
-	 * @param totalNecessidadesAlinhadasCNPq the totalNecessidadesAlinhadasCNPq to set
-	 */
-	public void setTotalNecessidadesAlinhadasCNPq(Integer totalNecessidadesAlinhadasCNPq) {
-		this.totalNecessidadesAlinhadasCNPq = totalNecessidadesAlinhadasCNPq;
-	}
-	/**
-	 * @return the totalNecessidadesAlinhadasEGD
-	 */
-	public Integer getTotalNecessidadesAlinhadasEGD() {
-		return totalNecessidadesAlinhadasEGD;
-	}
-	/**
-	 * @param totalNecessidadesAlinhadasEGD the totalNecessidadesAlinhadasEGD to set
-	 */
-	public void setTotalNecessidadesAlinhadasEGD(Integer totalNecessidadesAlinhadasEGD) {
-		this.totalNecessidadesAlinhadasEGD = totalNecessidadesAlinhadasEGD;
-	}
-	/**
-	 * @return the totalNecessidadesProjetosTransversais
-	 */
-	public Integer getTotalNecessidadesProjetosTransversais() {
-		return totalNecessidadesProjetosTransversais;
-	}
-	/**
-	 * @param totalNecessidadesProjetosTransversais the totalNecessidadesProjetosTransversais to set
-	 */
-	public void setTotalNecessidadesProjetosTransversais(Integer totalNecessidadesProjetosTransversais) {
-		this.totalNecessidadesProjetosTransversais = totalNecessidadesProjetosTransversais;
-	}
-	/**
-	 * @return the totalNecessidadesProjetosEspecificos
-	 */
-	public Integer getTotalNecessidadesProjetosEspecificos() {
-		return totalNecessidadesProjetosEspecificos;
-	}
-	/**
-	 * @param totalNecessidadesProjetosEspecificos the totalNecessidadesProjetosEspecificos to set
-	 */
-	public void setTotalNecessidadesProjetosEspecificos(Integer totalNecessidadesProjetosEspecificos) {
-		this.totalNecessidadesProjetosEspecificos = totalNecessidadesProjetosEspecificos;
-	}
-	/**
-	 * @return the totalNecessidadesOutras
-	 */
-	public Integer getTotalNecessidadesOutras() {
-		return totalNecessidadesOutras;
-	}
-	/**
-	 * @param totalNecessidadesOutras the totalNecessidadesOutras to set
-	 */
-	public void setTotalNecessidadesOutras(Integer totalNecessidadesOutras) {
-		this.totalNecessidadesOutras = totalNecessidadesOutras;
 	}
 	/**
 	 * @return the totalNecessidadesLotacao
@@ -204,6 +141,18 @@ public class DTORelatorio implements Serializable{
 	 */
 	public void setTotalUsuariosUnidade(List<DTOChaveValor> totalUsuariosUnidade) {
 		this.totalUsuariosUnidade = totalUsuariosUnidade;
+	}
+	/**
+	 * @return the alinhamentosEstrategicos
+	 */
+	public List<DTOChaveValor> getAlinhamentosEstrategicos() {
+		return alinhamentosEstrategicos;
+	}
+	/**
+	 * @param alinhamentosEstrategicos the alinhamentosEstrategicos to set
+	 */
+	public void setAlinhamentosEstrategicos(List<DTOChaveValor> alinhamentosEstrategicos) {
+		this.alinhamentosEstrategicos = alinhamentosEstrategicos;
 	}
 
 

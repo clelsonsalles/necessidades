@@ -8,6 +8,19 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 
 
+		<style type="text/css">
+			.jqplot-meterGauge-label {
+			    font-size: 1.1em;
+		        color: #999999;
+			    padding-top: 15px;
+			}
+			.graficoBarraEspecial .jqplot-xaxis-tick {
+				transform: rotate(30deg);
+				top: 15px;
+			}
+			
+		</style>
+
 
 
 	<h:form id="formListaNecessidade">		
@@ -19,10 +32,51 @@
 					<p:chart type="metergauge" model="#{chartView.calibradorGraficoUsuariosModel}" style="width:400px;height:230px" />	
 		    	</div>
 			    <div class="col-lg-4 text-center" >
-					<p:chart type="metergauge" model="#{chartView.calibradorGraficoNecessidadesModel}" style="width:400px;height:230px" />
+					<!-- recuperaTotalUsuariosFinalizados  calibradorGraficoUsuariosFinalizadosModel -->
+					<p:chart type="metergauge" model="#{chartView.calibradorGraficoUsuariosFinalizadosModel}" style="width:400px;height:230px" />	
 				</div>		    
 			    <div class="col-lg-4 text-center" >
+					<!-- recuperaTotalUsuariosLotacao pizzaTotalUsuarioLotacao -->
+					<p:chart type="pie" model="#{chartView.pizzaTotalUsuarioLotacao}" style="width:320px;height:240px" />
+				</div>		    
+			    <div class="col-lg-12 text-center" >
+					<!-- recuperaTotalUsuariosCargo -->
+					<p:chart type="bar" model="#{chartView.barraTotalUsuarioCargo}" style="height:340px" />
+				</div>		    
+		    </div>
+<!-- 
+		    <div class="col-lg-12" >
+			    <div class="col-lg-12 text-center" >
+					recuperaTotalUsuariosUnidade
+					<p:chart type="bar" model="#{chartView.barraTotalUsuarioUnidade}" style="height:240px" />
+				</div>		    
+		    </div>
+
+ -->
+ 		    <div class="col-lg-12" >
+		    	
+			    <div class="col-lg-6 text-center" >
+					<p:chart type="metergauge" model="#{chartView.calibradorGraficoNecessidadesModel}" style="width:400px;height:230px" />
+				</div>		    
+			    <div class="col-lg-6 text-center" >
 					<p:chart type="pie" model="#{chartView.pizzaTotalNecessidadeLotacao}" style="width:320px;height:240px" />
+				</div>		    
+			    <div class="col-lg-12 text-center" >
+					<!-- recuperaTotalNecessidadesCargo -->
+					<p:chart type="bar" model="#{chartView.barraTotalNecessidadeCargo}" style="height:340px" />
+				</div>		    
+			    <div class="col-lg-12 text-center graficoBarraEspecial" >
+					<!-- recuperaTotalNecessidadesUnidade -->
+					<p:chart type="bar" model="#{chartView.barraTotalNecessidadeUnidade}" style="height:340px"  />
+				</div>		    
+		    </div>
+		    <div class="col-lg-12" >
+
+			    <div class="col-lg-6 text-center" >
+					<!-- Alinhamento Estratégico - Transversais, Específicos e outros -->
+				</div>		    
+			    <div class="col-lg-6 text-center" >
+					<!-- Alinhamento Estratégico - CNPq, EGD e nenhum -->
 				</div>		    
 		    </div>
 		    <div class="col-lg-12" >
@@ -57,6 +111,24 @@
 											</p>
 										</div>
 									</div>
+									<div class="col-lg-12" style='padding-top: 10px; '>
+										<p style='padding: 0 30px; margin: 0px;'>
+											Alinhamento Estratégico: <strong>#{necessidade.questao.nome}</strong>
+										</p>
+										<p style='padding: 0 30px; margin: 0px;'>
+										Descrição:
+										</p>
+										<p style='padding: 0 45px; margin: 0px;'>
+											#{necessidade.questao.descricao}
+										</p>
+										<p style='padding: 0 30px; margin: 0px;'>
+										Observações:
+										</p>
+										<p style='padding: 0 45px; margin: 0px;'>
+											#{necessidade.questao.justificativa}
+										</p>
+									</div>
+									
 								</div>
 							</div>    
 							</div>    

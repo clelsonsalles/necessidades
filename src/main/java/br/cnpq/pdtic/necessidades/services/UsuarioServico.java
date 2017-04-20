@@ -29,7 +29,11 @@ import br.cnpq.pdtic.necessidades.entities.ObjetivoEstrategico;
 import br.cnpq.pdtic.necessidades.entities.Questao;
 import br.cnpq.pdtic.necessidades.entities.Usuario;
 
-
+/**
+ * 
+ * @author Clelson Salles Rodrigues
+ *
+ */
 public class UsuarioServico 
 {
 	

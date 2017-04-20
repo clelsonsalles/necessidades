@@ -4,16 +4,20 @@
  */
 package br.cnpq.pdtic.necessidades.dao;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
+import br.cnpq.pdtic.necessidades.dto.DTOChaveValor;
 import br.cnpq.pdtic.necessidades.entities.Usuario;
-import br.cnpq.pdtic.necessidades.util.PasswordUtils;
 
 @Repository
 public class UsuarioDAO extends AbstractDAO<Usuario> {
@@ -86,5 +90,54 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
     }
 
     
+    public List<DTOChaveValor> recuperaTotalUsuariosLotacao(){
+    	List<DTOChaveValor> totalUsuariosLotacao = new ArrayList<DTOChaveValor>();
+
+    	String select =	"Select lot.nome as descricao, count(nec.id) as valor " 
+    			+ "from Necessidade nec "
+    			+ "inner join Usuario u on nec.usuario = u.idUsuario "
+    			+ "inner join DominioLotacao lot on u.lotacao = lot.idlotacao "
+    			+ "Group by lot.nome";
+    	Query query = getEntityManager().createNativeQuery(select, "DTOChaveValorMapping");
+
+    	totalUsuariosLotacao = query.getResultList();
+    	return totalUsuariosLotacao;
+    }
+    
+    public List<DTOChaveValor> recuperaTotalUsuariosCargo(){
+    	List<DTOChaveValor> totalUsuariosCargo = new ArrayList<DTOChaveValor>();
+
+    	String select =	"Select car.nome as descricao, count(u.idUsuario) as valor " 
+    			+ "from Usuario u "
+    			+ "inner join dominiocargo car on u.cargo = car.idcargo "
+    			+ "Group by car.nome";
+    	Query query = getEntityManager().createNativeQuery(select, "DTOChaveValorMapping");
+
+    	totalUsuariosCargo = query.getResultList();
+    	return totalUsuariosCargo;
+    }
+
+    public List<DTOChaveValor> recuperaTotalUsuariosUnidade(){
+    	List<DTOChaveValor> totalUsuariosUnidade = new ArrayList<DTOChaveValor>();
+
+    	String select =	"Select u.unidade as descricao, count(u.idUsuario) as valor " 
+    			+ "from Usuario u "
+    			+ "Group by u.unidade";
+    	Query query = getEntityManager().createNativeQuery(select, "DTOChaveValorMapping");
+
+    	totalUsuariosUnidade = query.getResultList();
+    	return totalUsuariosUnidade;
+    }
+
+
+    public Integer recuperaTotalUsuariosFinalizados(){
+    	String select =	"Select count(u.idUsuario) " 
+    			+ "from Usuario u "
+    			+ "WHERE u.finalizado = true";
+    	Query query = getEntityManager().createNativeQuery(select);
+
+    	return ((BigInteger)  query.getSingleResult()).intValue();
+    }
+
     
 }

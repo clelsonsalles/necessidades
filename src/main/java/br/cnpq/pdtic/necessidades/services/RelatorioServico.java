@@ -7,32 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.cnpq.pdtic.necessidades.dao.AlinhamentoNecessidadeObjetivoDAO;
-import br.cnpq.pdtic.necessidades.dao.CargoDAO;
-import br.cnpq.pdtic.necessidades.dao.GrupoDAO;
-import br.cnpq.pdtic.necessidades.dao.LotacaoDAO;
 import br.cnpq.pdtic.necessidades.dao.NecessidadeDAO;
-import br.cnpq.pdtic.necessidades.dao.ObjetivoEstrategicoDAO;
-import br.cnpq.pdtic.necessidades.dao.QuestaoDAO;
 import br.cnpq.pdtic.necessidades.dao.UsuarioDAO;
 import br.cnpq.pdtic.necessidades.dto.DTONecessidade;
-import br.cnpq.pdtic.necessidades.dto.DTOProjeto;
 import br.cnpq.pdtic.necessidades.dto.DTORelatorio;
-import br.cnpq.pdtic.necessidades.entities.AlinhamentoNecessidadeObjetivo;
-import br.cnpq.pdtic.necessidades.entities.DominioCargo;
-import br.cnpq.pdtic.necessidades.entities.DominioLotacao;
-import br.cnpq.pdtic.necessidades.entities.Grupo;
 import br.cnpq.pdtic.necessidades.entities.Necessidade;
-import br.cnpq.pdtic.necessidades.entities.ObjetivoEstrategico;
-import br.cnpq.pdtic.necessidades.entities.Questao;
-import br.cnpq.pdtic.necessidades.entities.Usuario;
 
 /**
- * @author Siva
+ * @author Clelson Salles Rodrigues
  *
  */
 public class RelatorioServico 
@@ -43,26 +27,8 @@ public class RelatorioServico
 	private UsuarioDAO usuarioDAO;
 	
 	@Autowired
-	private LotacaoDAO lotacaoDAO;
-
-	@Autowired
-	private CargoDAO cargoDAO;
-	
-	@Autowired
-	private QuestaoDAO questaoDAO;
-	
-	@Autowired
-	private GrupoDAO grupoDAO;
-
-	@Autowired
 	private NecessidadeDAO necessidadeDAO;
 	
-	@Autowired
-	private ObjetivoEstrategicoDAO objetivoEstrategicoDAO;
-
-	@Autowired
-	private AlinhamentoNecessidadeObjetivoDAO alinhamentoNecessidadeObjetivoDAO;
-
 
 	public DTORelatorio carregaResultados(){
 		DTORelatorio relat = new DTORelatorio();
@@ -72,7 +38,16 @@ public class RelatorioServico
 		relat.setTotalUsuarios(usuarioDAO.count());
 
 		relat.setTotalNecessidadesLotacao(necessidadeDAO.recuperaTotalNecessidadesLotacao());
+		relat.setTotalNecessidadesCargo(necessidadeDAO.recuperaTotalNecessidadesCargo());
+		relat.setTotalNecessidadesUnidade(necessidadeDAO.recuperaTotalNecessidadesUnidade());
+
+		relat.setTotalUsuariosLotacao(usuarioDAO.recuperaTotalUsuariosLotacao());
+		relat.setTotalUsuariosCargo(usuarioDAO.recuperaTotalUsuariosCargo());
+		relat.setTotalUsuariosUnidade(usuarioDAO.recuperaTotalUsuariosUnidade());
 		
+		relat.setTotalUsuariosFinalizados(usuarioDAO.recuperaTotalUsuariosFinalizados());
+		
+		relat.setAlinhamentosEstrategicos(necessidadeDAO.recuperaAlinhamentosEstrategicos());
 		
 		return relat;
 	}
