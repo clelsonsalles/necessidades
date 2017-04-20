@@ -47,6 +47,8 @@ public class ChartView implements Serializable {
     private BarChartModel barraTotalNecessidadeCargo;    
     private BarChartModel barraTotalNecessidadeUnidade;    
     
+    private BarChartModel barraAlinhamentoEstrategico;    
+
     private List<DTONecessidade>  listaTodasNecessidades = new ArrayList<DTONecessidade>();
 
 	/**
@@ -67,6 +69,8 @@ public class ChartView implements Serializable {
 		
 		barraTotalNecessidadeCargo 		= criaBarrasGraficoModel(relatorio.getTotalNecessidadesCargo(), "Total de Necessidadeas por Cargo", "Cargo", "Total de Necessidades");
 		barraTotalNecessidadeUnidade 	= criaBarrasGraficoModel(relatorio.getTotalNecessidadesUnidade(), "Total de Necessidades por Unidade", "Unidade", "Total de Necessidades");
+		
+		barraAlinhamentoEstrategico		= criaBarrasGraficoModel(relatorio.getAlinhamentosEstrategicos(), "Alinhamento Estratégico", "Alinhamento", "Total de Necessidades");
 
 		listaTodasNecessidades = relatorioServico.recuperaListaNecessidades();
         
@@ -338,6 +342,20 @@ public class ChartView implements Serializable {
 	 */
 	public void setBarraTotalNecessidadeUnidade(BarChartModel barraTotalNecessidadeUnidade) {
 		this.barraTotalNecessidadeUnidade = barraTotalNecessidadeUnidade;
+	}
+
+	/**
+	 * @return the barraAlinhamentoEstrategico
+	 */
+	public BarChartModel getBarraAlinhamentoEstrategico() {
+		return barraAlinhamentoEstrategico;
+	}
+
+	/**
+	 * @param barraAlinhamentoEstrategico the barraAlinhamentoEstrategico to set
+	 */
+	public void setBarraAlinhamentoEstrategico(BarChartModel barraAlinhamentoEstrategico) {
+		this.barraAlinhamentoEstrategico = barraAlinhamentoEstrategico;
 	}
  
 }

@@ -143,10 +143,12 @@ public class NecessidadeDAO extends AbstractDAO<Necessidade> {
     			+ "where g.id in (10) ";
     	Query queryOutrasNecessidades = getEntityManager().createNativeQuery(selectOutrasNecessidades, "DTOChaveValorMapping");
     	DTOChaveValor dtoOutrasNecessidades = (DTOChaveValor) queryOutrasNecessidades.getSingleResult();
-    	totalNecessidadesEstrategicas.add(dtoOutrasNecessidades);
+    	// TODO: Definir como tratar, pois este resultado agrupo os Objetivos CNPq, EGD e outras
+//    	totalNecessidadesEstrategicas.add(dtoOutrasNecessidades);
 
     	// Necessidades classificadas como Outras Necessidades E QUE NÃO ESTEJA associada a um objetivo estrategico do CNPq nem mesmo da EGD
-    	String selectOutrasNaoOE =	"select 'Outras Necessidades, não alinhadas aos Objetivos Estratégicos do CNPq nem da EGD' as descricao, count (nec.id) as valor  "
+//    	String selectOutrasNaoOE =	"select 'Outras Necessidades, não alinhadas aos Objetivos Estratégicos do CNPq nem da EGD' as descricao, count (nec.id) as valor  "
+    	String selectOutrasNaoOE =	"select 'Outro alinhamento' as descricao, count (nec.id) as valor  "
     			+ "from necessidade nec "
     			+ "inner join questao q on nec.questao = q.id "
     			+ "inner join grupo g on q.grupo = g.id "

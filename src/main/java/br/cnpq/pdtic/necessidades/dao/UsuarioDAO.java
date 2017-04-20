@@ -93,9 +93,8 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
     public List<DTOChaveValor> recuperaTotalUsuariosLotacao(){
     	List<DTOChaveValor> totalUsuariosLotacao = new ArrayList<DTOChaveValor>();
 
-    	String select =	"Select lot.nome as descricao, count(nec.id) as valor " 
-    			+ "from Necessidade nec "
-    			+ "inner join Usuario u on nec.usuario = u.idUsuario "
+    	String select =	"Select lot.nome as descricao, count(u.idUsuario) as valor " 
+    			+ "from Usuario u  "
     			+ "inner join DominioLotacao lot on u.lotacao = lot.idlotacao "
     			+ "Group by lot.nome";
     	Query query = getEntityManager().createNativeQuery(select, "DTOChaveValorMapping");
